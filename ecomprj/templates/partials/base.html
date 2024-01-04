@@ -565,6 +565,20 @@
                                     </ul>
                                 </li>
                                 <li>
+                                    {% if email is None %}
+                                    <a class="active" href="{% url 'core:categorylist' email=None %}">Categories <i
+                                            class="fi-rs-angle-down"></i></a>
+                                    {% else %}
+                                    <a class="active" href="{% url 'core:categorylist' email=email %}">Categories <i
+                                            class="fi-rs-angle-down"></i></a>
+                                    {% endif %}
+                                    <ul class="sub-menu">
+                                        {% for c in base_categories %}
+                                            <li><a href="{% url 'core:product_list_by_category' email=email %}?categoryid={{c.id}}">{{c.title}}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                <li>
                                     <a href="page-about.html">About</a>
                                 </li>
                                 <li>
