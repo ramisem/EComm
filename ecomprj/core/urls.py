@@ -1,4 +1,6 @@
 from django.urls import path
+
+from core.partial_views import get_all_categories_by_pagination
 from core.views import index, home_page_view, category_list_view, product_list_by_category_view, product_details_view, \
     product_vendor_details_view,product_tags_details_view
 
@@ -19,6 +21,7 @@ class URLS:
         path('product/vendordetails/<str:email>/', product_vendor_details_view, name='vendor-detail'),
         path('product/tags/', product_tags_details_view, name='tags'),
         path('product/tags/<str:email>/', product_tags_details_view, name='tags'),
+        path('partial_views/categories/', get_all_categories_by_pagination, name='get_all_categories_by_pagination'),
     ]
 
     def __dir__(self):
