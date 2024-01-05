@@ -9263,6 +9263,35 @@ span.fi-rs-apps {
     top: 4px;
 }
 
+.categories-dropdown-wrap .more_categories span.less_icon {
+    display: inline-block;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: 2px solid;
+    border-radius: 30px;
+    margin-right: 5px;
+}
+
+.categories-dropdown-wrap .more_categories span.less_icon::before {
+    content: "";
+    width: 12px;
+    height: 2px;
+    background-color: #3BB77E;
+    position: absolute;
+    right: 4px;
+    top: 9px;
+}
+
+.categories-dropdown-wrap .more_categories span.less_icon::after {
+    content: "";
+    height: 12px;
+    background-color: #3BB77E;
+    position: absolute;
+    right: 9px;
+    top: 4px;
+}
+
 .categories-dropdown-wrap .more_categories.show span.icon::after {
     display: none;
     content: none;
