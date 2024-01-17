@@ -21,6 +21,7 @@
     <script src="{% static 'assets/js/vendor/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'assets/js/util/auto_logout.js' %}"></script>
     <script src="{% static 'assets/js/util/util.js' %}"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -79,12 +80,16 @@
             background-color: #45a049;
         }
 
+
     </style>
 </head>
 
 <body>
 {% if idle_time %}
 <script>var autoLogoutTime = {{ idle_time }}</script>
+{% endif %}
+{% if email %}
+   <script>var logged_in_emailid = "{{ email }}"</script>
 {% endif %}
 
 <!-- Quick view -->
@@ -446,95 +451,12 @@
                 <div class="header-nav d-none d-lg-flex">
                     <div class="main-categori-wrap d-none d-lg-block">
                         <a class="categories-button-active" href="#">
-                            <span class="fi-rs-apps"></span> <span class="et">Browse</span> All Categories
+                            <span class="fi-rs-apps"></span> <span class="et">Browse All Categories</span>
                             <i class="fi-rs-angle-down"></i>
                         </a>
-                        <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
-                            <div class="d-flex categori-dropdown-inner">
-                                <ul>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img
-                                                src="{% static 'assets/imgs/theme/icons/category-1.svg' %}" alt=""/>Milks
-                                            and Dairies</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img
-                                                src="{% static 'assets/imgs/theme/icons/category-2.svg' %}" alt=""/>Clothing
-                                            & beauty</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img
-                                                src="{% static 'assets/imgs/theme/icons/category-3.svg' %}" alt=""/>Pet
-                                            Foods & Toy</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img
-                                                src="{% static 'assets/imgs/theme/icons/category-4.svg' %}" alt=""/>Baking
-                                            material</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img
-                                                src="{% static 'assets/imgs/theme/icons/category-5.svg' %}" alt=""/>Fresh
-                                            Fruit</a>
-                                    </li>
-                                </ul>
-                                <ul class="end">
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img
-                                                src="{% static 'assets/imgs/theme/icons/category-6.svg' %}" alt=""/>Wines
-                                            & Drinks</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img
-                                                src="{% static 'assets/imgs/theme/icons/category-7.svg' %}" alt=""/>Fresh
-                                            Seafood</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img
-                                                src="{% static 'assets/imgs/theme/icons/category-8.svg' %}" alt=""/>Fast
-                                            food</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img
-                                                src="{% static 'assets/imgs/theme/icons/category-9.svg' %}" alt=""/>Vegetables</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img
-                                                src="{% static 'assets/imgs/theme/icons/category-10.svg' %}" alt=""/>Bread
-                                            and Juice</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="more_slide_open" style="display: none">
-                                <div class="d-flex categori-dropdown-inner">
-                                    <ul>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img
-                                                    src="{% static 'assets/imgs/theme/icons/icon-1.svg' %}" alt=""/>Milks
-                                                and Dairies</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img
-                                                    src="{% static 'assets/imgs/theme/icons/icon-2.svg' %}" alt=""/>Clothing
-                                                & beauty</a>
-                                        </li>
-                                    </ul>
-                                    <ul class="end">
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img
-                                                    src="{% static 'assets/imgs/theme/icons/icon-3.svg' %}" alt=""/>Wines
-                                                & Drinks</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img
-                                                    src="{% static 'assets/imgs/theme/icons/icon-4.svg' %}" alt=""/>Fresh
-                                                Seafood</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="more_categories"><span class="icon"></span> <span class="heading-sm-1">Show more...</span>
-                            </div>
+                        <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading"
+                             id="categories-dropdown">
+                            <!--                            Category.html to be rendered-->
                         </div>
                     </div>
                     <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
@@ -573,8 +495,10 @@
                                             class="fi-rs-angle-down"></i></a>
                                     {% endif %}
                                     <ul class="sub-menu">
-                                        {% for c in base_categories %}
-                                            <li><a href="{% url 'core:product_list_by_category' email=email %}?categoryid={{c.id}}">{{c.title}}</a></li>
+                                        {% for c in all_categories %}
+                                        <li>
+                                            <a href="{% url 'core:product_list_by_category' email=email %}?categoryid={{c.id}}">{{c.title}}</a>
+                                        </li>
                                         {% endfor %}
                                     </ul>
                                 </li>
@@ -808,6 +732,7 @@
                         $(".alert").alert("close");
                         },3000
                     )
+
 
 
             </script>
@@ -1285,6 +1210,7 @@
 <!-- Template  JS -->
 <script src="{% static 'assets/js/main.js' %}"></script>
 <script src="{% static 'assets/js/shop.js' %}"></script>
+<script src="{% static 'assets/js/template/partials/page_categorydropdown.js' %}"></script>
 </body>
 
 {{ redirect_to_login_immediately }}

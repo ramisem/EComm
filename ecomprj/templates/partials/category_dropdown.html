@@ -1,0 +1,89 @@
+{% for c in categories %}
+    {% if forloop.counter <= 10 %}
+        <div class="d-flex categori-dropdown-inner">
+            {% if forloop.counter <= 5 %}
+                <ul>
+                    <li>
+                        {% if email is None %}
+                            <a href="{% url 'core:product_list_by_category' email=None %}?categoryid={{c.id}}"> <img
+                                    src="{{c.image.url}}" alt=""/>{{c.title}}</a>
+                        {% else %}
+                            <a href="{% url 'core:product_list_by_category' email=email %}?categoryid={{c.id}}"> <img
+                                    src="{{c.image.url}}" alt=""/>{{c.title}}</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            {% else %}
+                <ul class="end">
+                    <li>
+                        {% if email is None %}
+                            <a href="{% url 'core:product_list_by_category' email=None %}?categoryid={{c.id}}"> <img
+                                    src="{{c.image.url}}" alt=""/>{{c.title}}</a>
+                        {% else %}
+                            <a href="{% url 'core:product_list_by_category' email=email %}?categoryid={{c.id}}"> <img
+                                    src="{{c.image.url}}" alt=""/>{{c.title}}</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="more_slide_open" style="display: none">
+            <div class="d-flex categori-dropdown-inner">
+                {% if forloop.counter <= 15 %}
+                    <ul>
+                        <li>
+                            {% if email is None %}
+                                <a href="{% url 'core:product_list_by_category' email=None %}?categoryid={{c.id}}"> <img
+                                        src="{{c.image.url}}" alt=""/>{{c.title}}</a>
+                            {% else %}
+                                <a href="{% url 'core:product_list_by_category' email=email %}?categoryid={{c.id}}"> <img
+                                        src="{{c.image.url}}" alt=""/>{{c.title}}</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                {% else %}
+                    <ul class="end">
+                        <li>
+                            {% if email is None %}
+                                <a href="{% url 'core:product_list_by_category' email=None %}?categoryid={{c.id}}"> <img
+                                        src="{{c.image.url}}" alt=""/>{{c.title}}</a>
+                            {% else %}
+                                <a href="{% url 'core:product_list_by_category' email=email %}?categoryid={{c.id}}"> <img
+                                        src="{{c.image.url}}" alt=""/>{{c.title}}</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+<div class="more_categories" id="show_more_toggle_button"><span class="icon"></span> <span class="heading-sm-1">Show more...</span>
+</div>
+
+<div class="pagination" id="pagination_links">
+    <span class="step-links">
+        {% if categories.has_previous %}
+            <a href="{% url 'core:get_all_categories_by_pagination' %}?page=1">first</a>
+            <a href="{% url 'core:get_all_categories_by_pagination' %}?page={{ categories.previous_page_number }}">previous</a>
+        {% endif %}
+
+        {% if categories.paginator.num_pages > 1 %}
+            <span class="current">
+                Page {{ categories.number }} of {{ categories.paginator.num_pages }}.
+            </span>
+        {% endif %}
+
+        {% if categories.has_next %}
+            <a href="{% url 'core:get_all_categories_by_pagination' %}?page={{ categories.next_page_number }}">next</a>
+            <a href="{% url 'core:get_all_categories_by_pagination' %}?page={{ categories.paginator.num_pages }}">last</a>
+        {% endif %}
+    </span>
+</div>
+<script>
+    document.getElementById('show_more_toggle_button').addEventListener('click', function () {
+        toggleShowButton();
+    });
+
+</script>

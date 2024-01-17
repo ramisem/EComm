@@ -8,7 +8,7 @@ from django.http import JsonResponse
 class ProductException(Exception):
 
     def __init__(self, request=None, message=None, custom_message=None, mode=None, page=None,
-                 context=None, logoff=False, jsonresponse=False):
+                 context=None, logoff=False, jsonresponse=False, no_ui_message=False):
         self.custom_message = custom_message
         self.message = message
         self.request = request
@@ -19,6 +19,7 @@ class ProductException(Exception):
         if self.message is not None:
             print_log.error(error_message=str(self.message))
         self.jsonresponse = jsonresponse
+        self.no_ui_message = no_ui_message
         super().__init__(self.message)
 
     def set_request(self, request=None):
@@ -53,9 +54,13 @@ class ProductException(Exception):
         if jsonresponse is not None:
             self.jsonresponse = jsonresponse
 
+    def set_no_ui_message(self, no_ui_message=False):
+        if not no_ui_message:
+            self.no_ui_message = no_ui_message
+
     def handle_exception(self):
         remove_message(self.request, remove_all=True)
-        if self.request is not None and self.custom_message is not None:
+        if not self.no_ui_message and self.request is not None and self.custom_message is not None:
             messages.warning(self.request, f'{str(self.custom_message)}')
         if self.logoff and self.request is not None:
             logout(self.request)

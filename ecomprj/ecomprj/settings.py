@@ -76,7 +76,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 # 'django_auto_logout.context_processors.auto_logout_client',
                 'utils.auto_logout_context_processor.auto_logout_client',
-                'core.context_processor.get_all_categories_base_html',
+                'core.context_processor.get_all_categories',
             ],
         },
     },
