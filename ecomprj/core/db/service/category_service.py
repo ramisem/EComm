@@ -23,7 +23,7 @@ class CategoryService(Service):
 
                 if self.filters['condition'] == 'OR':
                     query |= Q(**{f"{key}__in": value_list})
-                elif self.filters['condition'] == 'AND' or 'condition' not in self.filters :
+                elif self.filters['condition'] == 'AND' or 'condition' not in self.filters:
                     query &= Q(**{f"{key}__in": value_list})
             return Category.objects.filter(query).annotate(item_count=Count("product_category"))
         else:
