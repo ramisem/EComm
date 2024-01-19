@@ -16,22 +16,17 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path,include
-import core.urls,userauths.urls,utils.urls
+from django.urls import path, include
+import core.urls, userauths.urls, utils.urls
 from django.conf import settings
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("",include((core.urls.URLS,'core'),namespace='core')),
-    path("user/",include((userauths.urls.URLS,'userauths'),namespace='userauths')),
-    path("utils/",include((utils.urls.URLS,'utils'),namespace='utils')),
+    path("", include((core.urls.URLS, 'core'), namespace='core')),
+    path("user/", include((userauths.urls.URLS, 'userauths'), namespace='userauths')),
+    path("utils/", include((utils.urls.URLS, 'utils'), namespace='utils')),
 ]
 
 # Serve media files during development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-
-
