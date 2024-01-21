@@ -115,7 +115,6 @@ SESSION_COOKIE_AGE = 900
 SESSION_CUSTOM_COOKIE_AGE = 300
 SESSION_SAVE_EVERY_REQUEST = True
 
-
 # Logger Configuration
 # settings.py
 
@@ -231,10 +230,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
+    'site_title': "ESHOP Admin",
     'site_header': 'ESHOP Admin',
     'site_brand': 'You order, we deliver',
     'site_logo': 'assets/imgs/admin/admin.png',
-    'copyright': 'ESHOP.COM'
+    'copyright': 'ESHOP.COM',
+    'welcome_sign': 'ESHOP Admin Login',
 }
 
 AUTH_USER_MODEL = 'userauths.User'
