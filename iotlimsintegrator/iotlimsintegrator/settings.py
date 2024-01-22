@@ -215,12 +215,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
-    'site_title': "Integrator Admin",
-    'site_header': 'Integrator Admin',
+    'site_title': "Integrator Configuration",
+    'site_header': 'Integrator Configuration',
     'site_brand': 'Configurations',
     'site_logo': 'assets/imgs/IOTIntegrator.jpg',
     'copyright': 'EPAM.COM',
-    'welcome_sign': 'Integrator Admin Login',
+    'welcome_sign': 'Integrator Configuration Login',
 }
 
 # DJANGO AUTO LOGOUT
