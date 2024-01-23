@@ -223,6 +223,8 @@ JAZZMIN_SETTINGS = {
     'welcome_sign': 'Integrator Configuration Login',
 }
 
+AUTH_USER_MODEL = 'userauthentication.User'
+
 # DJANGO AUTO LOGOUT
 
 AUTO_LOGOUT = {
