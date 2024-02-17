@@ -1,10 +1,13 @@
+from auditlog.registry import auditlog
 from django.db import models
 from shortuuid.django_fields import ShortUUIDField
+from auditlog.models import AuditlogHistoryField
 
 
 class IOT_Type(models.Model):
     iot_type_id = models.AutoField(primary_key=True, verbose_name="IOT_Type_Id")
     description = models.CharField(max_length=200, verbose_name="Description")
+    history = AuditlogHistoryField()
 
     class Meta:
         verbose_name = "IOT Type"
@@ -23,6 +26,7 @@ class IOT_Device(models.Model):
     description = models.CharField(max_length=200, verbose_name="Description")
     manufacturer = models.CharField(max_length=200, verbose_name="Manufacturer")
     uuid = ShortUUIDField(unique=True, length=40, max_length=40, verbose_name="UUId")
+    history = AuditlogHistoryField()
 
     class Meta:
         verbose_name = "IOT Device"
@@ -31,3 +35,6 @@ class IOT_Device(models.Model):
     def __str__(self):
         return self.uuid
 
+
+auditlog.register(IOT_Type)
+auditlog.register(IOT_Device)

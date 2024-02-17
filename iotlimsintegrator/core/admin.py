@@ -32,7 +32,6 @@ class IOT_Device_Admin(admin.ModelAdmin):
     def history_view(self, request, object_id, extra_context=None):
         extra_context = extra_context or {}
         extra_context['history_entry_list'] = LogEntry.objects.filter(object_id=object_id)
-        print('extra_context', LogEntry.objects.filter(object_id=object_id))
         return super().history_view(request, object_id, extra_context)
 
     def sync_device_info(self, request, queryset):
