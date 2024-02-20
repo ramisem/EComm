@@ -99,6 +99,7 @@ DATABASES = {
     }
 }
 
+
 # Cache Configuration
 CACHES = {
     'default': {

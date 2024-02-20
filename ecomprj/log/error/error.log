@@ -3463,3 +3463,631 @@ Traceback (most recent call last):
   File "C:\PythonImplementation\PracticeProject\webapps\ecomprj\core\views.py", line 124, in product_list_by_category_view
     print('Category Resultset-->',category.cid)
 AttributeError: 'QuerySet' object has no attribute 'cid'
+ERROR 2024-01-03 16:02:42,053 logger 7576 5628 Invalid user-id/password
+NoneType: None
+ERROR 2024-01-03 16:02:59,943 logger 7576 14532 Invalid user-id/password
+NoneType: None
+ERROR 2024-01-04 17:53:12,095 logger 13372 16880 
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\utils\encrypt_decrypt.py", line 67, in decrypt_parameter
+    decrypted_parameter = cipher_suite.decrypt(unquote(encrypted_parameter)).decode()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 86, in decrypt
+    timestamp, data = Fernet._get_unverified_token_data(token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 122, in _get_unverified_token_data
+    raise InvalidToken
+cryptography.fernet.InvalidToken
+ERROR 2024-01-04 18:47:28,240 logger 22128 12916 
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 134, in _verify_signature
+    h.verify(data[-32:])
+cryptography.exceptions.InvalidSignature: Signature did not match digest.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\utils\encrypt_decrypt.py", line 67, in decrypt_parameter
+    decrypted_parameter = cipher_suite.decrypt(unquote(encrypted_parameter)).decode()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 91, in decrypt
+    return self._decrypt_data(data, timestamp, time_info)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 152, in _decrypt_data
+    self._verify_signature(data)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 136, in _verify_signature
+    raise InvalidToken
+cryptography.fernet.InvalidToken
+ERROR 2024-01-05 12:52:37,766 logger 9108 3432 Exception occurred from the get_all_categories_pagination partial view.
+Please check log for more details
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\core\partial_views.py", line 23, in get_all_categories_by_pagination
+    categories_html = render_to_string('partials/categories.html', {'categories': final_category_list})
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 5: 'static'. Did you forget to register or load this tag?
+ERROR 2024-01-05 12:56:56,175 logger 9108 9880 Exception occurred from the get_all_categories_pagination partial view.
+Please check log for more details
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\core\partial_views.py", line 23, in get_all_categories_by_pagination
+    categories_html = render_to_string('partials/categories.html', {'categories': final_category_list})
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 5: 'static'. Did you forget to register or load this tag?
+ERROR 2024-01-05 13:20:03,486 logger 5848 7644 Exception occurred from the get_all_categories_pagination partial view.
+Please check log for more details
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\core\partial_views.py", line 23, in get_all_categories_by_pagination
+    categories_html = render_to_string('partials/categories.html', {'categories': final_category_list})
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 5: 'static'. Did you forget to register or load this tag?
+ERROR 2024-01-05 13:20:37,853 logger 5848 5452 Exception occurred from the get_all_categories_pagination partial view.
+Please check log for more details
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\core\partial_views.py", line 23, in get_all_categories_by_pagination
+    categories_html = render_to_string('partials/categories.html', {'categories': final_category_list})
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 5: 'static'. Did you forget to register or load this tag?
+ERROR 2024-01-05 18:09:16,950 logger 5848 6568 Exception occurred from the get_all_categories_pagination partial view.
+Please check log for more details
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'c'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\core\partial_views.py", line 23, in get_all_categories_by_pagination
+    categories_html = render_to_string('partials/categories.html', {'categories': final_category_list})
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 3: 'c'. Did you forget to register or load this tag?
+ERROR 2024-01-05 18:10:38,841 logger 4644 19664 Exception occurred from the get_all_categories_pagination partial view.
+Please check log for more details
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'c'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\core\partial_views.py", line 24, in get_all_categories_by_pagination
+    categories_html = render_to_string('partials/categories.html', {'categories': category_list})
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 3: 'c'. Did you forget to register or load this tag?
+ERROR 2024-01-05 18:12:26,948 logger 4644 22252 Exception occurred from the get_all_categories_pagination partial view.
+Please check log for more details
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'c'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\core\partial_views.py", line 24, in get_all_categories_by_pagination
+    categories_html = render_to_string('partials/categories.html', {'categories': category_list})
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 3: 'c'. Did you forget to register or load this tag?
+ERROR 2024-01-05 18:13:46,576 logger 4644 2820 Exception occurred from the get_all_categories_pagination partial view.
+Please check log for more details
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'c'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\core\partial_views.py", line 24, in get_all_categories_by_pagination
+    categories_html = render_to_string('partials/categories.html', {'categories': category_list})
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 3: 'c'. Did you forget to register or load this tag?
+ERROR 2024-01-09 20:34:18,516 logger 14572 10264 Exception occurred from the get_all_categories_pagination partial view.
+Please check log for more details
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\core\partial_views.py", line 23, in get_all_categories_by_pagination
+    categories_html = render_to_string('partials/categories.html', {'categories': final_category_list})
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: partials/categories.html
+ERROR 2024-01-09 20:34:32,526 logger 14572 9740 Exception occurred from the get_all_categories_pagination partial view.
+Please check log for more details
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\core\partial_views.py", line 23, in get_all_categories_by_pagination
+    categories_html = render_to_string('partials/categories.html', {'categories': final_category_list})
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: partials/categories.html
+ERROR 2024-01-12 12:13:36,178 logger 13116 11348 Exception occurred from the get_all_categories_pagination partial view.
+Please check log for more details
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\core\partial_views.py", line 23, in get_all_categories_by_pagination
+    categories_html = render_to_string('partials/category_dropdown.html', {'categories': final_category_list})
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 238, in render
+    nodelist.append(node.render_annotated(context))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'product_list_by_category' with keyword arguments '{'email': ''}' not found. 2 pattern(s) tried: ['category/product/(?P<email>[^/]+)/\\Z', 'category/product/\\Z']
+ERROR 2024-01-12 12:20:39,140 logger 13116 7240 Exception occurred from the get_all_categories_pagination partial view.
+Please check log for more details
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'else'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\core\partial_views.py", line 23, in get_all_categories_by_pagination
+    categories_html = render_to_string('partials/category_dropdown.html', {'categories': final_category_list})
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 853, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 953, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 953, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 967, in do_if
+    nodelist = parser.parse(("endif",))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 558, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 15: 'else', expected 'endif'. Did you forget to register or load this tag?
+ERROR 2024-01-12 12:23:19,502 logger 13116 11664 
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\utils\encrypt_decrypt.py", line 67, in decrypt_parameter
+    decrypted_parameter = cipher_suite.decrypt(unquote(encrypted_parameter)).decode()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 86, in decrypt
+    timestamp, data = Fernet._get_unverified_token_data(token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 122, in _get_unverified_token_data
+    raise InvalidToken
+cryptography.fernet.InvalidToken
+ERROR 2024-01-12 12:23:19,506 logger 13116 11664 Permission denied. Please log in with proper credentials.
+NoneType: None
+ERROR 2024-01-15 17:31:02,125 logger 25116 9580 
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\utils\encrypt_decrypt.py", line 67, in decrypt_parameter
+    decrypted_parameter = cipher_suite.decrypt(unquote(encrypted_parameter)).decode()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 86, in decrypt
+    timestamp, data = Fernet._get_unverified_token_data(token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 122, in _get_unverified_token_data
+    raise InvalidToken
+cryptography.fernet.InvalidToken
+ERROR 2024-01-15 17:31:02,129 logger 25116 9580 Permission denied. Please log in with proper credentials.
+NoneType: None
+ERROR 2024-01-15 18:04:53,090 logger 12836 3736 
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 134, in _verify_signature
+    h.verify(data[-32:])
+cryptography.exceptions.InvalidSignature: Signature did not match digest.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\utils\encrypt_decrypt.py", line 67, in decrypt_parameter
+    decrypted_parameter = cipher_suite.decrypt(unquote(encrypted_parameter)).decode()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 91, in decrypt
+    return self._decrypt_data(data, timestamp, time_info)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 152, in _decrypt_data
+    self._verify_signature(data)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 136, in _verify_signature
+    raise InvalidToken
+cryptography.fernet.InvalidToken
+ERROR 2024-01-16 23:39:53,032 logger 22916 2324 
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 117, in _get_unverified_token_data
+    data = base64.urlsafe_b64decode(token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\base64.py", line 133, in urlsafe_b64decode
+    return b64decode(s)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\base64.py", line 87, in b64decode
+    return binascii.a2b_base64(s)
+binascii.Error: Incorrect padding
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\utils\encrypt_decrypt.py", line 67, in decrypt_parameter
+    decrypted_parameter = cipher_suite.decrypt(unquote(encrypted_parameter)).decode()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 86, in decrypt
+    timestamp, data = Fernet._get_unverified_token_data(token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 119, in _get_unverified_token_data
+    raise InvalidToken
+cryptography.fernet.InvalidToken
+ERROR 2024-01-16 23:39:53,035 logger 22916 2324 Permission denied. Please log in with proper credentials.
+NoneType: None
+ERROR 2024-01-16 23:59:00,613 logger 22916 14976 Exception occurred from the get_all_categories_pagination partial view.
+Please check log for more details
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\core\partial_views.py", line 24, in get_all_categories_by_pagination
+    categories_html = render_to_string('partials/category_dropdown.html',
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 238, in render
+    nodelist.append(node.render_annotated(context))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'product_list_by_category' with keyword arguments '{'email': ''}' not found. 2 pattern(s) tried: ['category/product/(?P<email>[^/]+)/\\Z', 'category/product/\\Z']
+ERROR 2024-01-16 23:59:32,599 logger 22916 21084 Exception occurred from the get_all_categories_pagination partial view.
+Please check log for more details
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\core\partial_views.py", line 24, in get_all_categories_by_pagination
+    categories_html = render_to_string('partials/category_dropdown.html',
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 238, in render
+    nodelist.append(node.render_annotated(context))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'product_list_by_category' with keyword arguments '{'email': ''}' not found. 2 pattern(s) tried: ['category/product/(?P<email>[^/]+)/\\Z', 'category/product/\\Z']
+ERROR 2024-01-17 17:07:22,140 logger 11740 19268 
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 117, in _get_unverified_token_data
+    data = base64.urlsafe_b64decode(token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\base64.py", line 133, in urlsafe_b64decode
+    return b64decode(s)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\base64.py", line 87, in b64decode
+    return binascii.a2b_base64(s)
+binascii.Error: Incorrect padding
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\utils\encrypt_decrypt.py", line 67, in decrypt_parameter
+    decrypted_parameter = cipher_suite.decrypt(unquote(encrypted_parameter)).decode()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 86, in decrypt
+    timestamp, data = Fernet._get_unverified_token_data(token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 119, in _get_unverified_token_data
+    raise InvalidToken
+cryptography.fernet.InvalidToken
+ERROR 2024-01-17 17:07:22,143 logger 11740 19268 Permission denied. Please log in with proper credentials.
+NoneType: None
