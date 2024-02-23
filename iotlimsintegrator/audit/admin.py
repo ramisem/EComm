@@ -3,8 +3,6 @@ from auditlog.filters import ResourceTypeFilter
 from auditlog.models import LogEntry
 from django.contrib import admin
 
-from audit.forms import AuditSearchForm
-
 
 class CustomLogEntryAdmin(LogEntryAdmin):
     search_fields = []
