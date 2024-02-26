@@ -34,6 +34,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'jazzmin',
+    'rangefilter',
+    'csp',
     # 'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -89,7 +91,6 @@ DATABASES = {
         'HOST': 'localhost'
     }
 }
-
 
 # Cache Configuration
 CACHES = {
@@ -226,6 +227,12 @@ JAZZMIN_SETTINGS = {
     'site_logo': 'assets/imgs/IOTIntegrator.jpg',
     'copyright': 'EPAM.COM',
     'welcome_sign': 'Integrator Configuration Login',
+    'order_with_respect_to': ["auth", "userauthentication", "core.iot_type", "core.iot_device", "auditlog", "audit"],
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "litera",
+    "dark_mode_theme": "darkly",
 }
 
 AUTH_USER_MODEL = 'userauthentication.User'
