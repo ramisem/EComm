@@ -1,7 +1,7 @@
 from auditlog.models import LogEntryManager, LogEntry
 from django.conf import settings
 from django.db import models
-from django.db.models.signals import pre_delete
+from django.db.models.signals import pre_delete, post_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
@@ -61,18 +61,19 @@ class ArchivedAuditLog(models.Model):
         verbose_name_plural = _("Archived data log entries")
 
 
+@receiver(post_save, sender=LogEntry, dispatch_uid='save_logentry_signal')
 @receiver(pre_delete, sender=LogEntry, dispatch_uid='delete_logentry_signal')
 def archive_audit_logs(sender, instance, **kwargs):
-    archived_log = ArchivedAuditLog()
-    archived_log.action = instance.action
-    archived_log.timestamp = instance.timestamp
-    archived_log.object_id = instance.object_id
-    archived_log.object_pk = instance.object_pk
-    archived_log.actor_id = instance.actor_id
-    archived_log.object_repr = instance.object_repr
-    archived_log.remote_addr = instance.remote_addr
-    archived_log.changes = instance.changes
-    archived_log.content_type_id = instance.content_type_id
-    archived_log.audit_sequence = instance.id
-    archived_log.save()
-
+    if (kwargs.get('signal') in [pre_delete]) or (kwargs.get('created', False) and instance.action == 2):
+        archived_log = ArchivedAuditLog()
+        archived_log.action = instance.action
+        archived_log.timestamp = instance.timestamp
+        archived_log.object_id = instance.object_id
+        archived_log.object_pk = instance.object_pk
+        archived_log.actor_id = instance.actor_id
+        archived_log.object_repr = instance.object_repr
+        archived_log.remote_addr = instance.remote_addr
+        archived_log.changes = instance.changes
+        archived_log.content_type_id = instance.content_type_id
+        archived_log.audit_sequence = instance.id
+        archived_log.save()
