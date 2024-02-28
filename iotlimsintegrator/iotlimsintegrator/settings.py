@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'core',
     'auditlog',
     'audit',
+    'apidetails',
 ]
 
 MIDDLEWARE = [
@@ -227,7 +228,7 @@ JAZZMIN_SETTINGS = {
     'site_logo': 'assets/imgs/IOTIntegrator.jpg',
     'copyright': 'EPAM.COM',
     'welcome_sign': 'Integrator Configuration Login',
-    'order_with_respect_to': ["auth", "userauthentication", "core.iot_type", "core.iot_device", "auditlog", "audit"],
+    'order_with_respect_to': ["auth", "userauthentication", "core.iot_type", "core.iot_device", "auditlog", "audit", "apidetails.http_method", "apidetails.apidetail"],
 }
 
 JAZZMIN_UI_TWEAKS = {
