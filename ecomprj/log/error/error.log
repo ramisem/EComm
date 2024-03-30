@@ -4091,3 +4091,47 @@ Traceback (most recent call last):
 cryptography.fernet.InvalidToken
 ERROR 2024-01-17 17:07:22,143 logger 11740 19268 Permission denied. Please log in with proper credentials.
 NoneType: None
+ERROR 2024-03-07 00:59:51,293 logger 16100 17780 
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 117, in _get_unverified_token_data
+    data = base64.urlsafe_b64decode(token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\base64.py", line 133, in urlsafe_b64decode
+    return b64decode(s)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\base64.py", line 87, in b64decode
+    return binascii.a2b_base64(s)
+binascii.Error: Incorrect padding
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\utils\encrypt_decrypt.py", line 67, in decrypt_parameter
+    decrypted_parameter = cipher_suite.decrypt(unquote(encrypted_parameter)).decode()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 86, in decrypt
+    timestamp, data = Fernet._get_unverified_token_data(token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 119, in _get_unverified_token_data
+    raise InvalidToken
+cryptography.fernet.InvalidToken
+ERROR 2024-03-07 00:59:51,294 logger 16100 17780 Permission denied. Please log in with proper credentials.
+NoneType: None
+ERROR 2024-03-07 01:00:53,740 logger 16100 24364 
+Traceback (most recent call last):
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 117, in _get_unverified_token_data
+    data = base64.urlsafe_b64decode(token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\base64.py", line 133, in urlsafe_b64decode
+    return b64decode(s)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\base64.py", line 87, in b64decode
+    return binascii.a2b_base64(s)
+binascii.Error: Incorrect padding
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\PythonImplementations\webapps\ecomprj\utils\encrypt_decrypt.py", line 67, in decrypt_parameter
+    decrypted_parameter = cipher_suite.decrypt(unquote(encrypted_parameter)).decode()
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 86, in decrypt
+    timestamp, data = Fernet._get_unverified_token_data(token)
+  File "C:\Users\ramise_mondal\AppData\Local\Programs\Python\Python38\lib\site-packages\cryptography\fernet.py", line 119, in _get_unverified_token_data
+    raise InvalidToken
+cryptography.fernet.InvalidToken
+ERROR 2024-03-07 01:00:53,741 logger 16100 24364 Permission denied. Please log in with proper credentials.
+NoneType: None
