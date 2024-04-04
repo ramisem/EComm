@@ -10,9 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-from pathlib import Path
 import os
 from datetime import timedelta
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'auditlog',
     'audit',
     'apidetails',
+    'masterdata',
 ]
 
 MIDDLEWARE = [
@@ -228,7 +229,10 @@ JAZZMIN_SETTINGS = {
     'site_logo': 'assets/imgs/IOTIntegrator.jpg',
     'copyright': 'EPAM.COM',
     'welcome_sign': 'Integrator Configuration Login',
-    'order_with_respect_to': ["auth", "userauthentication", "core.iot_type", "core.iot_device", "auditlog", "audit", "apidetails.http_method", "apidetails.apidetail"],
+    'order_with_respect_to': ["auth", "userauthentication", "auditlog", "audit", "core", "core.iot_type",
+                              "core.iot_device", "masterdata", "masterdata.unit", "masterdata.param",
+                              "masterdata.event_type", "masterdata.event_type_iot_type_map" "apidetails.http_method",
+                              "apidetails.apidetail", "apidetails", "apidetails.http_method", "apidetails.apidetail"],
 }
 
 JAZZMIN_UI_TWEAKS = {
