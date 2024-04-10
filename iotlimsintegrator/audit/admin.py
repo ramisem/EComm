@@ -16,6 +16,7 @@ class CustomLogEntryAdmin(LogEntryAdmin):
     search_fields = []
     list_filter = ['object_id', ResourceTypeFilter, 'action', ('timestamp', CustomDateRangeFilter)]
     change_form_template = 'admin/audit/audit_change_form.html'
+    change_list_template = 'admin/audit/audit_change_list.html'
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
         extra_context = extra_context or {}
@@ -39,6 +40,7 @@ class ArchivedAuditLogAdmin(admin.ModelAdmin, ArchivedAuditLogMixin):
     list_display = ["created", "resource_url", "action", "msg_short", "user_url"]
     list_filter = ['object_id', ResourceTypeFilter, 'action', ('timestamp', CustomDateRangeFilter)]
     change_form_template = 'admin/audit/audit_change_form.html'
+    change_list_template = 'admin/audit/audit_change_list.html'
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
         extra_context = extra_context or {}

@@ -32,7 +32,7 @@ class IOT_Type_Admin(admin.ModelAdmin):
     )
 
     fieldsets = (
-        (None, {'fields': ('model_id', 'model_name', 'description')}),
+        (None, {'fields': ('model_id', 'model_name',)}),
     )
 
     def add_view(self, request, form_url='', extra_context=None):

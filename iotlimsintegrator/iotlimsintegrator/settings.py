@@ -26,9 +26,8 @@ SECRET_KEY = 'django-insecure-4w*2%x$31l-6h+umsq&$7&v!3x1uswe==39bmrdm3l5l%&x4$s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ['*']
-
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -48,6 +47,7 @@ INSTALLED_APPS = [
     'auditlog',
     'audit',
     'apidetails',
+    'eventmanagement',
     'masterdata',
 ]
 
@@ -232,7 +232,8 @@ JAZZMIN_SETTINGS = {
     'order_with_respect_to': ["auth", "userauthentication", "auditlog", "audit", "core", "core.iot_type",
                               "core.iot_device", "masterdata", "masterdata.unit", "masterdata.param",
                               "masterdata.event_type", "masterdata.event_type_iot_type_map" "apidetails.http_method",
-                              "apidetails.apidetail", "apidetails", "apidetails.http_method", "apidetails.apidetail"],
+                              "apidetails.apidetail", "apidetails", "apidetails.http_method", "apidetails.apidetail",
+                              "eventmanagement", "eventmanagement.event_rule"],
 }
 
 JAZZMIN_UI_TWEAKS = {

@@ -33,10 +33,13 @@ class Event_Type_IOT_Type_Map(models.Model):
     def __str__(self):
         return str(self.event_iot_map_id)
 
+    def __str__(self):
+        return str(self.iot_type_id)
+
 
 class Unit(models.Model):
     unit_id = models.AutoField(primary_key=True, verbose_name="Unit ID")
-    unit_name = models.CharField(max_length=80, verbose_name="Unit Name", unique=True)
+    unit_name = models.CharField(max_length=80, verbose_name="Unit", unique=True)
 
     class Meta:
         verbose_name = "Unit"
@@ -50,7 +53,7 @@ class Param(models.Model):
     param_id = models.AutoField(primary_key=True, verbose_name="Param ID")
     param_name = models.CharField(max_length=80, verbose_name="Param Name", unique=True)
     description = models.CharField(max_length=200, verbose_name="Description", blank=True, null=True)
-    unit = models.ForeignKey(Unit, null=True, on_delete=models.CASCADE, verbose_name="Param Unit",
+    unit = models.ForeignKey(Unit, blank=True, null=True, on_delete=models.CASCADE, verbose_name="Param Unit",
                              related_name="FK_Param_Unit")
 
     class Meta:

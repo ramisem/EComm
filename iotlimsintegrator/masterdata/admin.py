@@ -48,7 +48,6 @@ class Event_Rule_Param_Inline(admin.TabularInline):
 class Event_Type_IOT_Type_Map_Admin(admin.ModelAdmin):
     list_display = ['event_type_id', 'iot_type_id']
     readonly_fields = ['event_type_id', 'iot_type_id']
-    #search_fields = ['event_type_id', 'iot_type_id']
     list_filter = ['event_type_id', 'iot_type_id']
 
     inlines = [Event_Rule_Param_Inline]

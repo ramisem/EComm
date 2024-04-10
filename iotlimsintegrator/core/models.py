@@ -1,14 +1,14 @@
+from auditlog.models import AuditlogHistoryField
 from auditlog.registry import auditlog
 from django.db import models
 from shortuuid.django_fields import ShortUUIDField
-from auditlog.models import AuditlogHistoryField
 
 
 class IOT_Type(models.Model):
     iot_type_id = models.AutoField(primary_key=True, verbose_name="IOT_Type_Id")
     description = models.CharField(max_length=200, blank=True, null=True, verbose_name="Description")
-    model_name = models.CharField(max_length=40, verbose_name="Model Name")
-    model_id = models.CharField(unique=True, max_length=40, verbose_name="Model Id")
+    model_name = models.CharField(unique=True, max_length=40, verbose_name="IOT Type Name")
+    model_id = models.CharField(unique=True, max_length=40, verbose_name="IOT Type")
     history = AuditlogHistoryField()
 
     class Meta:
