@@ -218,7 +218,7 @@
 
                             {% if jazzmin_settings.navigation_expanded %}
                                 {% for app in side_menu_list %}
-                                    {% if app.name != 'Audit log' %}
+                                    {% if app.name != 'Audit log' and app.name != 'Archived Data' %}
                                         <li class="nav-header">{{ app.name }}</li>
                                         {% for model in app.models %}
                                             <li class="nav-item">
@@ -234,6 +234,21 @@
                                             </li>
                                         {% endfor %}
                                     {% elif app.name == 'Audit log' and user.is_superuser %}
+                                        <li class="nav-header">{{ app.name }}</li>
+                                        {% for model in app.models %}
+                                            <li class="nav-item">
+                                                {% if model.url %}
+                                                <a href="{{ model.url }}" class="nav-link">
+                                                    <i class="nav-icon {{ model.icon }}"></i> <p>{{ model.name }}</p>
+                                                </a>
+                                            {% else %}
+                                                <span class="nav-link disabled">
+                                                    <i class="nav-icon {{ model.icon }}"></i> <p>{{ model.name }}</p>
+                                                </span>
+                                            {% endif %}
+                                            </li>
+                                        {% endfor %}
+                                    {% elif app.name == 'Archived Data' and user.is_superuser %}
                                         <li class="nav-header">{{ app.name }}</li>
                                         {% for model in app.models %}
                                             <li class="nav-item">
@@ -252,7 +267,7 @@
                                 {% endfor %}
                             {% else %}
                                 {% for app in side_menu_list %}
-                                    {% if app.name != 'Audit log' %}
+                                    {% if app.name != 'Audit log' and app.name != 'Archived Data' %}
                                         <li class="nav-item has-treeview">
                                             <a href="#" class="nav-link">
                                                 <i class="nav-icon {{ app.icon }}"></i>
@@ -271,21 +286,38 @@
                                         </li>
                                     {% elif app.name == 'Audit log' and user.is_superuser %}
                                         <li class="nav-item has-treeview">
-                                                <a href="#" class="nav-link">
-                                                    <i class="nav-icon {{ app.icon }}"></i>
-                                                    <p>{{ app.name|truncatechars:21 }} <i class="fas fa-angle-left right"></i></p>
-                                                </a>
-                                                <ul class="nav nav-treeview" style="display: none;">
-                                                    {% for model in app.models %}
-                                                        <li class="nav-item">
-                                                            <a href="{% if model.url %}{{ model.url }}{% else %}javascript:void(0){% endif %}" class="nav-link">
-                                                                <i class="nav-icon {{ model.icon }}"></i>
-                                                                <p>{{ model.name }}</p>
-                                                            </a>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </li>
+                                            <a href="#" class="nav-link">
+                                                <i class="nav-icon {{ app.icon }}"></i>
+                                                <p>{{ app.name|truncatechars:21 }} <i class="fas fa-angle-left right"></i></p>
+                                            </a>
+                                            <ul class="nav nav-treeview" style="display: none;">
+                                                {% for model in app.models %}
+                                                    <li class="nav-item">
+                                                        <a href="{% if model.url %}{{ model.url }}{% else %}javascript:void(0){% endif %}" class="nav-link">
+                                                            <i class="nav-icon {{ model.icon }}"></i>
+                                                            <p>{{ model.name }}</p>
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% elif app.name == 'Audit log' and user.is_superuser %}
+                                        <li class="nav-item has-treeview">
+                                            <a href="#" class="nav-link">
+                                                <i class="nav-icon {{ app.icon }}"></i>
+                                                <p>{{ app.name|truncatechars:21 }} <i class="fas fa-angle-left right"></i></p>
+                                            </a>
+                                            <ul class="nav nav-treeview" style="display: none;">
+                                                {% for model in app.models %}
+                                                    <li class="nav-item">
+                                                        <a href="{% if model.url %}{{ model.url }}{% else %}javascript:void(0){% endif %}" class="nav-link">
+                                                            <i class="nav-icon {{ model.icon }}"></i>
+                                                            <p>{{ model.name }}</p>
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}

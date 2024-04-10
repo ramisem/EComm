@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 {% for app in dashboard_list %}
-                    {% if app.name != 'Audit log' %}
+                    {% if app.name != 'Audit log' and app.name != 'Archived Data' %}
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="m-0">{{ app.name }}</h5>
@@ -100,8 +100,44 @@
                         </div>
                         <div class="col-md-6 col-sm-12">
                         {% endif %}
+                    {% elif app.name == 'Archived Data' and user.is_superuser %}
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="m-0">{{ app.name }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-sm">
+                                    <tbody>
+                                    {% for model in app.models %}
+                                        <tr>
+                                            <td>
+                                                {% if model.url %}<a href="{{ model.url }}">{{ model.name }}</a>{% else %}{{ model.name }}{% endif %}
+                                            </td>
+                                            <td>
+                                                <div class="btn-group float-right">
+                                                    {% if model.add_url %}
+                                                        <a href="{{ model.add_url }}" class="btn btn-xs {{ jazzmin_ui.button_classes.success }} addlink">{% trans 'Add' %}</a>
+                                                    {% endif %}
+                                                    {% if model.url %}
+                                                        {% if model.view_only %}
+                                                            <a href="{{ model.url }}" class="btn btn-xs {{ jazzmin_ui.button_classes.info }} viewlink">{% trans 'View' %}</a>
+                                                        {% else %}
+                                                            <a href="{{ model.url }}" class="btn btn-xs {{ jazzmin_ui.button_classes.info }} changelink">{% if model.custom %}{% trans 'Go' %}{% else %}{% trans 'Change' %}{% endif %}</a>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {% if forloop.counter == middle|add:"0" %}
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                        {% endif %}
                     {% endif %}
-
                 {% endfor %}
                 </div>
         </div>
