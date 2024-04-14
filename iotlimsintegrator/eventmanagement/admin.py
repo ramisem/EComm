@@ -16,6 +16,7 @@ from django.utils.html import format_html
 from django.utils.translation import gettext as _
 
 from masterdata.models import Event_Type_IOT_Type_Map
+from userauthentication.models import User
 from .forms import EventRuleForm, EventRuleParamForm
 from .models import Event_Rule_Params, Event_Rule
 
@@ -30,10 +31,13 @@ class Event_ActionInline(admin.StackedInline):
 
 
 class IOT_EventManagement_Admin(admin.ModelAdmin):
-    list_display = ('name', 'event_type_id', 'iot_type_id', 'created_by', 'rule_frequency', 'rule_frequency_unit')
-    list_filter = ['name', 'event_type_id', 'iot_type_id', 'created_by']
+    list_display = (
+        'name', 'event_type_id', 'iot_type_id', 'created_by', 'rule_frequency', 'rule_frequency_unit', 'is_active')
+    list_filter = ['name', 'event_type_id', 'iot_type_id', 'created_by', 'is_active']
 
     inlines = [Event_ActionInline]
+
+    actions = ['activate_rules', 'deactivate_rules']
 
     change_form_template = 'admin/eventmanagement/eventmanagement_change_form.html'
 
@@ -50,6 +54,10 @@ class IOT_EventManagement_Admin(admin.ModelAdmin):
             map_obj = Event_Type_IOT_Type_Map.objects.get(event_type_id=obj.event_type_id,
                                                           iot_type_id=obj.iot_type_id)
             obj.event_iot_map_id = map_obj
+            if request.user.is_authenticated:
+                username = request.user.username
+                user_map_obj = User.objects.get(username=username)
+                obj.created_by = user_map_obj
             super().save_model(request, obj, form, change)
         except Exception as e:
             messages.error(request, f"Error saving model: {e}")
@@ -255,16 +263,26 @@ class IOT_EventManagement_Admin(admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
         form.base_fields['event_iot_map_id'].widget = HiddenInput()
-        # form.base_fields['event_rule_id'].widget = HiddenInput()
         return form
 
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = super().get_readonly_fields(request, obj=obj)
+        readonly_fields += ('created_by',)
         if obj and obj.pk:
             param_count = Event_Rule_Params.objects.filter(event_rule_id=obj.pk).count()
             if param_count > 0:
                 readonly_fields += ('iot_type_id', 'event_type_id',)
         return readonly_fields
+
+    def activate_rules(self, request, queryset):
+        queryset.update(is_active=True)
+
+    activate_rules.short_description = "Activate selected rule(s)"
+
+    def deactivate_rules(self, request, queryset):
+        queryset.update(is_active=False)
+
+    deactivate_rules.short_description = "Deactivate selected rule(s)"
 
     class Media:
         js = ('js/eventmanagement/maint_eventmanagement.js', 'js/util/util.js',)

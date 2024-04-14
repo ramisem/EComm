@@ -1,5 +1,6 @@
 from auditlog.registry import auditlog
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 import userauthentication
 from core import models as core_models
@@ -18,7 +19,11 @@ class Event_Rule(models.Model):
     iot_type_id = models.ForeignKey(core_models.IOT_Type, null=True, on_delete=models.CASCADE, verbose_name="IOT Type")
     event_type_id = models.ForeignKey(masterdata_models.Event_Type, null=True, on_delete=models.CASCADE,
                                       verbose_name="Event Type")
-    created_by = models.ForeignKey(userauthentication.models.User, null=True, on_delete=models.CASCADE,
+    is_active = models.BooleanField(
+        _("Active"),
+        default=True,
+    )
+    created_by = models.ForeignKey(userauthentication.models.User, null=True, blank=True, on_delete=models.CASCADE,
                                    verbose_name="Created By")
     rule_frequency = models.IntegerField(null=True, verbose_name="Frequency")
     rule_frequency_unit = models.CharField(null=True, max_length=40, choices=FREQUENCY_UNIT_CHOICES,

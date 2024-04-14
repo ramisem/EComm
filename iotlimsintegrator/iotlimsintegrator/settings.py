@@ -223,12 +223,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
-    'site_title': "Integrator Configuration",
-    'site_header': 'Integrator Configuration',
-    'site_brand': 'Configurations',
-    'site_logo': 'assets/imgs/IOTIntegrator.jpg',
+    'site_title': "EM-LIMS Integrator",
+    'site_header': 'EM-LIMS Integrator',
+    'site_brand': 'EM-LIMS Integrator',
+    'site_logo': 'assets/imgs/logo.png',
     'copyright': 'EPAM.COM',
-    'welcome_sign': 'Integrator Configuration Login',
+    "site_logo_classes": "custom-image",
+    "custom_css": "css/app.css",
+    'welcome_sign': 'EM-LIMS Integrator Login',
     'order_with_respect_to': ["auth", "userauthentication", "auditlog", "audit", "core", "core.iot_type",
                               "core.iot_device", "masterdata", "masterdata.unit", "masterdata.param",
                               "masterdata.event_type", "masterdata.event_type_iot_type_map" "apidetails.http_method",
@@ -238,7 +240,8 @@ JAZZMIN_SETTINGS = {
 
 JAZZMIN_UI_TWEAKS = {
     "theme": "litera",
-    "dark_mode_theme": "darkly",
+    # "sidebar": "sidebar-dark-primary",
+    "brand_small_text": True,
 }
 
 AUTH_USER_MODEL = 'userauthentication.User'
