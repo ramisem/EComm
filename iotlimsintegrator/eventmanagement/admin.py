@@ -16,6 +16,7 @@ from django.utils.html import format_html
 from django.utils.translation import gettext as _
 
 from masterdata.models import Event_Type_IOT_Type_Map
+from task.models import CustomPeriodicTask
 from userauthentication.models import User
 from .forms import EventRuleForm, EventRuleParamForm
 from .models import Event_Rule_Params, Event_Rule
@@ -32,19 +33,18 @@ class Event_ActionInline(admin.StackedInline):
 
 class IOT_EventManagement_Admin(admin.ModelAdmin):
     list_display = (
-        'name', 'event_type_id', 'iot_type_id', 'created_by', 'rule_frequency', 'rule_frequency_unit', 'is_active')
-    list_filter = ['name', 'event_type_id', 'iot_type_id', 'created_by', 'is_active']
+        'name', 'event_type_id', 'iot_type_id', 'created_dt', 'created_by', 'inbound_api', 'outbound_api')
+    list_filter = ['name', 'event_type_id', 'iot_type_id', 'created_dt', 'created_by']
 
     inlines = [Event_ActionInline]
 
-    actions = ['activate_rules', 'deactivate_rules']
+    date_hierarchy = 'created_dt'
 
     change_form_template = 'admin/eventmanagement/eventmanagement_change_form.html'
 
     fieldsets = (
         (None, {'fields': (
-            'name', 'event_type_id', 'iot_type_id', 'created_by', 'rule_frequency', 'rule_frequency_unit',
-            'event_iot_map_id')}),
+            'name', 'event_type_id', 'iot_type_id', 'inbound_api', 'outbound_api', 'created_by', 'event_iot_map_id')}),
     )
 
     form = EventRuleForm
@@ -274,15 +274,17 @@ class IOT_EventManagement_Admin(admin.ModelAdmin):
                 readonly_fields += ('iot_type_id', 'event_type_id',)
         return readonly_fields
 
-    def activate_rules(self, request, queryset):
-        queryset.update(is_active=True)
-
-    activate_rules.short_description = "Activate selected rule(s)"
-
-    def deactivate_rules(self, request, queryset):
-        queryset.update(is_active=False)
-
-    deactivate_rules.short_description = "Deactivate selected rule(s)"
+    def has_delete_permission(self, request, obj=None):
+        if request.method != 'GET' and obj is not None:
+            count = CustomPeriodicTask.objects.filter(
+                event_rule_id=obj.pk,
+                enabled=True
+            ).count()
+            if count > 0:
+                self.message_user(request,
+                                  f"You cannot delete the selected event rule(s) {obj.name} as there are active task(s) getting executed for the selected rule(s).")
+                return False
+        return super().has_delete_permission(request, obj)
 
     class Media:
         js = ('js/eventmanagement/maint_eventmanagement.js', 'js/util/util.js',)

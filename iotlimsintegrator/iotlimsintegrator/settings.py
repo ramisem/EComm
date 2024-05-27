@@ -33,6 +33,9 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'jazzmin',
+    'admin_tools_stats',
+    'dashboard',
+    'django_nvd3',
     'rangefilter',
     'csp',
     # 'whitenoise.runserver_nostatic',
@@ -49,6 +52,11 @@ INSTALLED_APPS = [
     'apidetails',
     'eventmanagement',
     'masterdata',
+    'django_celery_results',
+    'django_celery_beat',
+    'task',
+    'import_export',
+    'refenrencetype',
 ]
 
 MIDDLEWARE = [
@@ -233,23 +241,55 @@ JAZZMIN_SETTINGS = {
     'welcome_sign': 'EM-LIMS Integrator Login',
     'order_with_respect_to': ["auth", "userauthentication", "auditlog", "audit", "core", "core.iot_type",
                               "core.iot_device", "masterdata", "masterdata.unit", "masterdata.param",
-                              "masterdata.event_type", "masterdata.event_type_iot_type_map" "apidetails.http_method",
-                              "apidetails.apidetail", "apidetails", "apidetails.http_method", "apidetails.apidetail",
-                              "eventmanagement", "eventmanagement.event_rule"],
+                              "masterdata.event_type", "masterdata.event_type_iot_type_map", "refenrencetype",
+                              "apidetails", "apidetails.applicationdetail", "apidetails.apidetail", "eventmanagement",
+                              "eventmanagement.event_rule", "task", "task.customperiodictask"],
 }
 
 JAZZMIN_UI_TWEAKS = {
     "theme": "litera",
-    # "sidebar": "sidebar-dark-primary",
     "brand_small_text": True,
 }
 
 AUTH_USER_MODEL = 'userauthentication.User'
 
 # DJANGO AUTO LOGOUT
-
 AUTO_LOGOUT = {
     'IDLE_TIME': timedelta(minutes=15),
     'MESSAGE': 'The session has expired. Please login again to continue.',
     'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
 }
+
+# Celery Configuration Options
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/1'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+
+CELERY_RESULT_BACKEND = 'django-db'
+
+# Celery Beat Configuration
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+CELERY_APP_NAME = 'iotlimsintegrator'
+CELERY_NAMESPACE = 'CELERY'
+CELERY_LOG_FILE_FOR_INFO = 'log/info/task_log/info.log'
+CELERY_LOG_FILE_FOR_ERROR = 'log/error/task_log/error.log'
+CELERY_LOG_MAX_BYTES = 1024 * 1024 * 300
+CELERY_LOG_BACKUP_COUNT = 10
+
+# App Specific Properties
+APPLICATION_TASK_HANDLER = 'task.tasks.task_handler'
+APPLICATION_TASK_HANDLER_PROCESS_FOR_EM = 'evaluate_event_rule_condition'
+APPLICATION_TASK_HANDLER_PROCESS_FOR_LIMS = 'execute_lims_api_data_processor'
+APPLICATION_TASK_HANDLER_PROCESS_FOR_LIMS_CONNECTION = 'execute_lims_get_connection_api'
+APPLICATION_IOT_DEVICE_APP_NAME = 'Elemental Machine'
+APPLICATION_GET_ALL_IOT_DEVICE_INFO_API = 'api/machines.json'
+APPLICATION_INDIVIDUAL_IOT_DEVICE_INFO_API = 'api/machines/[device.uuid].json'
+APPLICATION_IOT_DEVICE_INFO_API_TOKEN_PROPERTY = 'access_token'
+APPLICATION_IOT_DEVICE_INFO_API_TOKEN_ID = 'cdd3c8788c499ceb4fa508359a3df1cf3fa736bddaf0050590fd4c7c7186ad9f'
+APPLICATION_LIMS_API_TOKEN_ID = ''
+APPLICATION_APPNAMESFORDASHBOARD_REF_NO = '1'
+
+IMPORT_EXPORT_SKIP_ADMIN_ACTION_EXPORT_UI = True

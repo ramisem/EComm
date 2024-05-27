@@ -218,7 +218,7 @@
 
                             {% if jazzmin_settings.navigation_expanded %}
                                 {% for app in side_menu_list %}
-                                    {% if app.name != 'Audit log' and app.name != 'Archived Data' %}
+                                    {% if app.name != 'Audit log' and app.name != 'Archived Data' and app.name != 'Celery Results'  and app.name != 'Periodic Tasks' and app.name != 'Admin_Tools_Stats' %}
                                         <li class="nav-header">{{ app.name }}</li>
                                         {% for model in app.models %}
                                             <li class="nav-item">
@@ -267,7 +267,7 @@
                                 {% endfor %}
                             {% else %}
                                 {% for app in side_menu_list %}
-                                    {% if app.name != 'Audit log' and app.name != 'Archived Data' %}
+                                    {% if app.name != 'Audit log' and app.name != 'Archived Data' and app.name != 'Celery Results'  and app.name != 'Periodic Tasks' and app.name != 'Admin_Tools_Stats' %}
                                         <li class="nav-item has-treeview">
                                             <a href="#" class="nav-link">
                                                 <i class="nav-icon {{ app.icon }}"></i>
@@ -301,7 +301,7 @@
                                                 {% endfor %}
                                             </ul>
                                         </li>
-                                    {% elif app.name == 'Audit log' and user.is_superuser %}
+                                    {% elif app.name == 'Archived Data' and user.is_superuser %}
                                         <li class="nav-item has-treeview">
                                             <a href="#" class="nav-link">
                                                 <i class="nav-icon {{ app.icon }}"></i>

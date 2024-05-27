@@ -2,6 +2,9 @@ from auditlog.models import AuditlogHistoryField
 from auditlog.registry import auditlog
 from django.db import models
 from shortuuid.django_fields import ShortUUIDField
+from django.utils.translation import gettext_lazy as _
+
+import userauthentication
 
 
 class IOT_Type(models.Model):
@@ -28,6 +31,12 @@ class IOT_Device(models.Model):
     description = models.CharField(max_length=200, blank=True, null=True, verbose_name="Description")
     manufacturer = models.CharField(max_length=200, blank=True, null=True, verbose_name="Manufacturer")
     uuid = ShortUUIDField(unique=True, length=40, max_length=40, verbose_name="UUId")
+    created_dt = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name=_('Created DateTime'), null=True, blank=True,
+        help_text=_('In UTC'))
+    created_by = models.ForeignKey(userauthentication.models.User, null=True, blank=True, on_delete=models.SET_NULL,
+                                   verbose_name="Created By")
     history = AuditlogHistoryField()
 
     class Meta:

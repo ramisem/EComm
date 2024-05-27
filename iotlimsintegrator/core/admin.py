@@ -1,4 +1,5 @@
 import requests
+from django.conf import settings
 from django.contrib import admin
 from django.contrib import messages
 from django.contrib.admin import helpers
@@ -17,6 +18,8 @@ from django.template.response import SimpleTemplateResponse, TemplateResponse
 from django.utils.translation import gettext as _
 from django.utils.translation import ngettext
 
+from apidetails.models import ApplicationDetail
+from userauthentication.models import User
 from .models import IOT_Type, IOT_Device
 
 
@@ -42,7 +45,7 @@ class IOT_Type_Admin(admin.ModelAdmin):
 
 
 class IOT_Device_Admin(admin.ModelAdmin):
-    list_display = ('uuid', 'iot_type_id', 'name', 'serialnumber', 'externalid')
+    list_display = ('uuid', 'iot_type_id', 'name', 'serialnumber', 'externalid', 'created_dt', 'created_by')
     search_fields = ('name', 'serialnumber', 'externalid', 'uuid', 'iot_type_id__model_name')
     actions = ['sync_device_info', 'sync_individual_device_info']
     autocomplete_fields = ['iot_type_id']
@@ -60,48 +63,126 @@ class IOT_Device_Admin(admin.ModelAdmin):
             {'fields': ('iot_type_id', 'uuid', 'name', 'serialnumber', 'externalid', 'description', 'manufacturer')}),
     )
 
+    date_hierarchy = 'created_dt'
+
     def add_view(self, request, form_url='', extra_context=None):
         extra_context = extra_context or {}
         extra_context['add_title'] = "Add IOT Device"
         return super().add_view(request, form_url, extra_context=extra_context)
 
+    def save_model(self, request, obj, form, change):
+        try:
+            if request.user.is_authenticated:
+                username = request.user.username
+                user_map_obj = User.objects.get(username=username)
+                obj.created_by = user_map_obj
+            super().save_model(request, obj, form, change)
+        except Exception as e:
+            messages.error(request, f"Error saving model: {e}")
+            return
+
     def sync_device_info(self, request, queryset):
-        api_url = 'https://api.elementalmachines.io:443/api/machines.json?access_token=cdd3c8788c499ceb4fa508359a3df1cf3fa736bddaf0050590fd4c7c7186ad9f'
+        iot_application_name = getattr(settings, 'APPLICATION_IOT_DEVICE_APP_NAME', '')
+        iot_device_info_api = getattr(settings, 'APPLICATION_GET_ALL_IOT_DEVICE_INFO_API', '')
+        iot_device_info_api_token_property = getattr(settings, 'APPLICATION_IOT_DEVICE_INFO_API_TOKEN_PROPERTY', '')
+        iot_device_info_api_token_id = getattr(settings, 'APPLICATION_IOT_DEVICE_INFO_API_TOKEN_ID', '')
 
-        response = requests.get(api_url)
+        disputed_property = ''
 
-        if response.status_code == 200:
-            all_devices = response.json()
+        if iot_application_name == '':
+            disputed_property += 'APPLICATION_IOT_DEVICE_APP_NAME'
+        if iot_device_info_api == '':
+            disputed_property += ',APPLICATION_GET_ALL_IOT_DEVICE_INFO_API'
+        if iot_device_info_api_token_property == '':
+            disputed_property += ',APPLICATION_IOT_DEVICE_INFO_API_TOKEN_PROPERTY'
+        if iot_device_info_api_token_id == '':
+            disputed_property += ',APPLICATION_IOT_DEVICE_INFO_API_TOKEN_ID'
 
-            for device in all_devices:
-                device_filter_kwargs = {'uuid': device['uuid']}
-                device_defaults = {
-                    'name': device['name'],
-                    'serialnumber': device['machine']['serial_number'],
-                    'externalid': device['machine']['mac_address'],
-                    'description': device['description'],
-                    'uuid': device['uuid'],
-                    'iot_type_id': IOT_Type.objects.update_or_create(model_id=device['machine']['machine_model_id'],
-                                                                     defaults={
-                                                                         'model_name': device['machine']['model']})[0]
-                }
-                # Use update_or_create for IOT_Device
-                IOT_Device.objects.update_or_create(
-                    **device_filter_kwargs,
-                    defaults=device_defaults
-                )
+        if disputed_property != '':
+            if disputed_property.startswith(','):
+                disputed_property = disputed_property[1:]  # Remove the leading comma
+            self.message_user(request,
+                              f"System configuration is not correct, Please check the following properties in the settings file: {disputed_property}")
+            return
 
-            self.message_user(request, "API call successful.")
+        iot_application_info = ApplicationDetail.objects.filter(name=iot_application_name).values(
+            'base_url').first()
+
+        if iot_application_info:
+            base_url = iot_application_info['base_url']
+            api_url = base_url + iot_device_info_api + '?' + iot_device_info_api_token_property + '=' + iot_device_info_api_token_id
+
+            response = requests.get(api_url)
+
+            if response.status_code == 200:
+                all_devices = response.json()
+
+                for device in all_devices:
+                    device_filter_kwargs = {'uuid': device['uuid']}
+                    device_defaults = {
+                        'name': device['name'],
+                        'serialnumber': device['machine']['serial_number'],
+                        'externalid': device['machine']['mac_address'],
+                        'description': device['description'],
+                        'uuid': device['uuid'],
+                        'iot_type_id': IOT_Type.objects.update_or_create(model_id=device['machine']['machine_model_id'],
+                                                                         defaults={
+                                                                             'model_name': device['machine']['model']})[
+                            0]
+                    }
+                    # Use update_or_create for IOT_Device
+                    IOT_Device.objects.update_or_create(
+                        **device_filter_kwargs,
+                        defaults=device_defaults
+                    )
+
+                self.message_user(request, "API call successful.")
+            else:
+                self.message_user(request, "API call failed.")
         else:
-            self.message_user(request, "API call failed.")
+            self.message_user(request,
+                              "No record found for the IOT device. Please check the APPLICATION_IOT_DEVICE_APP_NAME property in the setting file.")
 
     def sync_individual_device_info(self, request, queryset):
         with transaction.atomic():
             api_call_failed = False
+            iot_application_name = getattr(settings, 'APPLICATION_IOT_DEVICE_APP_NAME', '')
+            iot_device_info_api = getattr(settings, 'APPLICATION_INDIVIDUAL_IOT_DEVICE_INFO_API', '')
+            iot_device_info_api_token_property = getattr(settings, 'APPLICATION_IOT_DEVICE_INFO_API_TOKEN_PROPERTY', '')
+            iot_device_info_api_token_id = getattr(settings, 'APPLICATION_IOT_DEVICE_INFO_API_TOKEN_ID', '')
+
+            disputed_property = ''
+
+            if iot_application_name == '':
+                disputed_property += 'APPLICATION_IOT_DEVICE_APP_NAME'
+            if iot_device_info_api == '':
+                disputed_property += ',APPLICATION_INDIVIDUAL_IOT_DEVICE_INFO_API'
+            if iot_device_info_api_token_property == '':
+                disputed_property += ',APPLICATION_IOT_DEVICE_INFO_API_TOKEN_PROPERTY'
+            if iot_device_info_api_token_id == '':
+                disputed_property += ',APPLICATION_IOT_DEVICE_INFO_API_TOKEN_ID'
+
+            if disputed_property != '':
+                if disputed_property.startswith(','):
+                    disputed_property = disputed_property[1:]  # Remove the leading comma
+                self.message_user(request,
+                                  f"System configuration is not correct, Please check the following properties in the settings file: {disputed_property}")
+                return
+
+            iot_application_info = ApplicationDetail.objects.filter(name=iot_application_name).values(
+                'base_url').first()
+
+            if not iot_application_info:
+                raise Exception(
+                    "No record found for the IOT device. Please check the APPLICATION_IOT_DEVICE_APP_NAME property in the setting file.")
+
+            base_url = iot_application_info['base_url']
+
             for device in queryset:
                 try:
                     device_filter_kwargs = {'uuid': device.uuid}
-                    api_url = f"https://api.elementalmachines.io/api/machines/{device.uuid}.json?access_token=cdd3c8788c499ceb4fa508359a3df1cf3fa736bddaf0050590fd4c7c7186ad9f"
+                    iot_device_info_api = iot_device_info_api.replace("[device.uuid]", device.uuid)
+                    api_url = base_url + iot_device_info_api + "?" + iot_device_info_api_token_property + "=" + iot_device_info_api_token_id
                     response = requests.get(api_url)
                     if response.status_code == 200:
                         devices_info = response.json()

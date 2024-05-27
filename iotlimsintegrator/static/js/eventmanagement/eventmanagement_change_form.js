@@ -232,6 +232,7 @@
 
     function populateParamDropDownForEditableField() {
         var enabled_paramids_cols = ''
+        var map = {}
         for (var i = 0; true; i++) {
             var col_id = '#id_event_rule_params_set-' + i + '-param_id';
             var param_id_obj = document.querySelector(col_id);
@@ -240,6 +241,7 @@
             }
             if (!param_id_obj.disabled) {
                 enabled_paramids_cols += ',' + col_id;
+                map[col_id] = param_id_obj.value;
             }
         }
         if (enabled_paramids_cols != '') {
@@ -277,6 +279,7 @@
                                 optionElement.text = paramIdsByEventIOTMapId[i].param_name;
                                 temp_param_id_obj.appendChild(optionElement);
                             }
+                            temp_param_id_obj.value = map[enabled_paramids_cols_arr[col_index]];
                         }
                     }
                 },

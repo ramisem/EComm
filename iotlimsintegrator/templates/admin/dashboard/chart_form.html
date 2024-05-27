@@ -1,0 +1,33 @@
+<style>
+    .loading {
+        pointer-events:none;
+    }
+
+    form.loading * {
+       opacity: 50%;
+    }
+
+    form.loading::after {
+         content: " ";
+         height: 31px;
+         width: 31px;
+         display: inline-block;
+         background: rgba( 255, 255, 255, .8 )
+                url('http://i.stack.imgur.com/FhHRx.gif')
+                50% 50%
+                no-repeat;
+    }
+</style>
+<form class="stateform" action="." method="POST" enctype="multipart/form-data">
+   {% if all != 'Y' %}
+   <input id="load_on_change" title="Load on change" checked type="checkbox"/>⇒&nbsp;
+   {% endif %}
+   {% csrf_token %}
+   {% for w in form %}
+      {% if not w.is_hidden %}
+      {{ w.label }}:
+      {% endif %}
+      {{ w }}
+   {% endfor %}
+   <button class="reload" id="reload" title="reload values from unfinished periods" type="button" style="font-size:14px">Refresh Graph(⟳)</button>
+</form>

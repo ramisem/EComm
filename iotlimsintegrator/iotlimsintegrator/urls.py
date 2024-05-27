@@ -18,10 +18,13 @@ from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import path, include
 
+import dashboard.urls
 import eventmanagement.urls
 
 urlpatterns = [
     path('integratorconfig/', admin.site.urls),
     path('', lambda request: redirect('integratorconfig/')),
     path('eventmanagement/', include((eventmanagement.urls.URLS, 'eventmanagement'), namespace='eventmanagement')),
+    path('dashboard/', include((dashboard.urls.URLS, 'dashboard'), namespace='dashboard')),
+    path('admin_tools_stats/', include('admin_tools_stats.urls')),
 ]

@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 {% for app in dashboard_list %}
-                    {% if app.name != 'Audit log' and app.name != 'Archived Data' %}
+                    {% if app.name != 'Audit log' and app.name != 'Archived Data' and app.name != 'Celery Results'  and app.name != 'Periodic Tasks' and app.name != 'Admin_Tools_Stats' %}
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="m-0">{{ app.name }}</h5>

@@ -24,8 +24,8 @@ admin.site.register(Event_Type, Event_Type_Custom_Admin)
 
 
 class Param_Admin(admin.ModelAdmin):
-    list_display = ['param_name', 'description', 'unit']
-    search_fields = ['param_name']
+    list_display = ['param_name', 'vendor_param_id', 'description', 'unit']
+    search_fields = ['param_name', 'vendor_param_id']
 
 
 admin.site.register(Param, Param_Admin)

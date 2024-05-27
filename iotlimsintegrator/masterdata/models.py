@@ -52,13 +52,15 @@ class Unit(models.Model):
 class Param(models.Model):
     param_id = models.AutoField(primary_key=True, verbose_name="Param ID")
     param_name = models.CharField(max_length=80, verbose_name="Param Name", unique=True)
+    vendor_param_id = models.CharField(blank=True, null=True, max_length=80, verbose_name="External Param Id", default='')
     description = models.CharField(max_length=200, verbose_name="Description", blank=True, null=True)
-    unit = models.ForeignKey(Unit, blank=True, null=True, on_delete=models.CASCADE, verbose_name="Param Unit",
+    unit = models.ForeignKey(Unit, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="Param Unit",
                              related_name="FK_Param_Unit")
 
     class Meta:
         verbose_name = "Param"
         verbose_name_plural = "Params"
+        unique_together = ('vendor_param_id', 'param_name')
 
     def __str__(self):
         return self.param_name
