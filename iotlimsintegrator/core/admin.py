@@ -24,8 +24,8 @@ from .models import IOT_Type, IOT_Device
 
 
 class IOT_Type_Admin(admin.ModelAdmin):
-    list_display = ('model_id', 'model_name')
-    search_fields = ('model_id', 'model_name',)
+    list_display = ('model_name',)
+    search_fields = ('model_name',)
 
     add_fieldsets = (
         (None, {
