@@ -231,15 +231,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
-    'site_title': "EM-LIMS Integrator",
-    'site_header': 'EM-LIMS Integrator',
-    'site_brand': 'EM-LIMS Integrator',
-    'site_logo': 'assets/imgs/logo.png',
+    'site_title': "Nexus Fusion",
+    'site_header': 'Nexus Fusion',
+    'site_brand': ' ',
+    'site_logo': 'assets/imgs/Nexus Fusion.png',
     'copyright': 'EPAM.COM',
     "site_logo_classes": "custom-image",
     "custom_css": "css/app.css",
 
-    'welcome_sign': 'EM-LIMS Integrator Login',
+    'welcome_sign': 'Nexus Fusion Login',
     'order_with_respect_to': ["core", "core.iot_type",
                               "core.iot_device", "masterdata", "masterdata.unit", "masterdata.param",
                               "masterdata.event_type", "masterdata.event_type_iot_type_map", "refenrencetype",
@@ -259,8 +259,8 @@ JAZZMIN_UI_TWEAKS = {
     "navbar_small_text": False,
     "footer_small_text": False,
     "body_small_text": False,
-    "brand_small_text": True,
-    "brand_colour": "navbar-secondary",
+    "brand_small_text": False,
+    "brand_colour": "navbar-light",
     "accent": "accent-primary",
     "navbar": "navbar-secondary navbar-dark",
     "no_navbar_border": False,
