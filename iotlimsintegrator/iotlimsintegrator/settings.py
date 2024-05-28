@@ -242,10 +242,10 @@ JAZZMIN_SETTINGS = {
     'welcome_sign': 'Nexus Fusion Login',
     'order_with_respect_to': ["core", "core.iot_type",
                               "core.iot_device", "masterdata", "masterdata.unit", "masterdata.param",
-                              "masterdata.event_type", "masterdata.event_type_iot_type_map", "refenrencetype",
+                              "masterdata.event_type", "masterdata.event_type_iot_type_map",
                               "apidetails", "apidetails.applicationdetail", "apidetails.apidetail", "eventmanagement",
-                              "eventmanagement.event_rule", "task", "task.customperiodictask", "dashboard", "auth",
-                              "userauthentication", "auditlog", "audit"],
+                              "eventmanagement.event_rule", "task", "task.customperiodictask", "dashboard",
+                              "refenrencetype", "auth", "userauthentication", "auditlog", "audit"],
     "topmenu_links": [
         {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
         {"app": "core"}, {"app": "masterdata"}, {"app": "refenrencetype"}, {"app": "apidetails"},

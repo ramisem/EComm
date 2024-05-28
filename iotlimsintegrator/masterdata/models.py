@@ -7,7 +7,7 @@ from core import models as core_models
 # Create your models here.
 class Event_Type(models.Model):
     event_type_id = models.AutoField(primary_key=True, verbose_name="Event Type ID")
-    event_name = models.CharField(max_length=80, verbose_name="Event Name")
+    event_name = models.CharField(max_length=80, verbose_name="Event Type")
     description = models.CharField(max_length=200, blank=True, null=True, verbose_name="Description")
 
     class Meta:
