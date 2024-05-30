@@ -19,6 +19,7 @@ from django.utils.translation import gettext as _
 from django.utils.translation import ngettext
 
 from apidetails.models import ApplicationDetail
+from iotlimsintegrator.views import my_admin_site
 from userauthentication.models import User
 from .models import IOT_Type, IOT_Device
 
@@ -477,5 +478,5 @@ class IOT_Device_Admin(admin.ModelAdmin):
         )
 
 
-admin.site.register(IOT_Type, IOT_Type_Admin)
-admin.site.register(IOT_Device, IOT_Device_Admin)
+my_admin_site.register(IOT_Type, IOT_Type_Admin)
+my_admin_site.register(IOT_Device, IOT_Device_Admin)

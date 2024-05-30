@@ -1,11 +1,12 @@
+from auditlog.models import AuditlogHistoryField
 from auditlog.registry import auditlog
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 import apidetails
 import userauthentication
 from core import models as core_models
 from masterdata import models as masterdata_models
-from django.utils.translation import gettext_lazy as _
 
 
 # Create your models here.
@@ -29,6 +30,7 @@ class Event_Rule(models.Model):
                                      limit_choices_to={'type': 'outbound'})
     event_iot_map_id = models.ForeignKey(masterdata_models.Event_Type_IOT_Type_Map, null=True, blank=True,
                                          on_delete=models.SET_NULL, verbose_name="Event_Type_IOT_Type_Map_Id")
+    history = AuditlogHistoryField()
 
     def __str__(self):
         return self.name
@@ -66,6 +68,7 @@ class Event_Rule_Params(models.Model):
     duration = models.IntegerField(null=True, blank=True, verbose_name="Duration")
     unit_name = models.ForeignKey(masterdata_models.Unit, on_delete=models.SET_NULL, null=True, blank=True,
                                   verbose_name="Duration Unit")
+    history = AuditlogHistoryField()
 
     def evaluate_condition1(self, input_value):
         expression = f"{input_value} {self.operator1} {self.value1}"

@@ -7,6 +7,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_celery_beat.admin import PeriodicTaskAdmin, PeriodicTaskForm
 
+from iotlimsintegrator.views import my_admin_site
 from task.models import CustomPeriodicTask, TaskAudit
 from userauthentication.models import User
 
@@ -80,5 +81,5 @@ class TaskAuditAdmin(admin.ModelAdmin):
         return False
 
 
-admin.site.register(CustomPeriodicTask, CustomPeriodicAdmin)
-admin.site.register(TaskAudit, TaskAuditAdmin)
+my_admin_site.register(CustomPeriodicTask, CustomPeriodicAdmin)
+my_admin_site.register(TaskAudit, TaskAuditAdmin)

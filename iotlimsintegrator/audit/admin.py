@@ -6,6 +6,7 @@ from rangefilter.filters import DateRangeFilter
 
 from audit.mixins import ArchivedAuditLogMixin
 from audit.models import ArchivedAuditLog
+from iotlimsintegrator.views import my_admin_site
 
 
 class CustomDateRangeFilter(DateRangeFilter):
@@ -69,6 +70,5 @@ class ArchivedAuditLogAdmin(admin.ModelAdmin, ArchivedAuditLogMixin):
         return False
 
 
-admin.site.unregister(LogEntry)
-admin.site.register(LogEntry, CustomLogEntryAdmin)
-admin.site.register(ArchivedAuditLog, ArchivedAuditLogAdmin)
+my_admin_site.register(LogEntry, CustomLogEntryAdmin)
+my_admin_site.register(ArchivedAuditLog, ArchivedAuditLogAdmin)

@@ -2,6 +2,7 @@ import datetime
 
 from admin_tools_stats.forms import ChartSettingsForm
 from admin_tools_stats.models import DashboardStats, Interval, get_charts_timezone, CriteriaToStatsM2M
+from auditlog.models import AuditlogHistoryField
 from auditlog.registry import auditlog
 
 try:
@@ -18,6 +19,8 @@ from django.db.models import Value, DateTimeField
 
 
 class CustomDashboardStats(DashboardStats):
+    history = AuditlogHistoryField()
+
     class Meta:
         verbose_name = "Dashboard"
         verbose_name_plural = 'Dashboard'

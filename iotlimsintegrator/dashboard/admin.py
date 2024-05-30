@@ -1,12 +1,12 @@
 from admin_tools_stats.admin import DashboardStatsAdmin
-from django.contrib import admin, messages
+from django.contrib import messages
+from django.utils.html import format_html
 
 from dashboard.forms import CustomDashboardStatsForm
 from dashboard.models import CustomDashboardStats
-from django.utils.html import format_html
+from iotlimsintegrator.views import my_admin_site
 
 
-@admin.register(CustomDashboardStats)
 class CustomDashboardStatsAdmin(DashboardStatsAdmin):
     fieldsets = (
         ('Basic Information', {
@@ -68,3 +68,6 @@ class CustomDashboardStatsAdmin(DashboardStatsAdmin):
 
     class Media:
         js = ('js/dashboard/maint_dashboard.js', 'js/util/util.js',)
+
+
+my_admin_site.register(CustomDashboardStats, CustomDashboardStatsAdmin)

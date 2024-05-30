@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportActionModelAdmin
 from import_export.formats import base_formats
 
+from iotlimsintegrator.views import my_admin_site
 from userauthentication.models import User
 from .forms import API_Property_Details_Form, API_Detail_Form
 from .models import APIDetail, ApplicationDetail, API_Property_Details
@@ -104,5 +105,5 @@ class APIDetail_Admin(ImportExportActionModelAdmin):
             return
 
 
-admin.site.register(ApplicationDetail, ApplicationDetail_Admin)
-admin.site.register(APIDetail, APIDetail_Admin)
+my_admin_site.register(ApplicationDetail, ApplicationDetail_Admin)
+my_admin_site.register(APIDetail, APIDetail_Admin)

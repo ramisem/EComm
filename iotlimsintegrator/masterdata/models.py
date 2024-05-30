@@ -1,3 +1,4 @@
+from auditlog.models import AuditlogHistoryField
 from auditlog.registry import auditlog
 from django.db import models
 
@@ -9,6 +10,7 @@ class Event_Type(models.Model):
     event_type_id = models.AutoField(primary_key=True, verbose_name="Event Type ID")
     event_name = models.CharField(max_length=80, verbose_name="Event Type")
     description = models.CharField(max_length=200, blank=True, null=True, verbose_name="Description")
+    history = AuditlogHistoryField()
 
     class Meta:
         verbose_name = "Event Type"
@@ -24,6 +26,7 @@ class Event_Type_IOT_Type_Map(models.Model):
                                       related_name="FK_Event_Type_Id")
     iot_type_id = models.ForeignKey(core_models.IOT_Type, null=True, on_delete=models.CASCADE, verbose_name="IOT Type",
                                     related_name="FK_IOT_Type")
+    history = AuditlogHistoryField()
 
     class Meta:
         verbose_name = "Event/IOT Type"
@@ -40,6 +43,7 @@ class Event_Type_IOT_Type_Map(models.Model):
 class Unit(models.Model):
     unit_id = models.AutoField(primary_key=True, verbose_name="Unit ID")
     unit_name = models.CharField(max_length=80, verbose_name="Unit", unique=True)
+    history = AuditlogHistoryField()
 
     class Meta:
         verbose_name = "Unit"
@@ -52,10 +56,12 @@ class Unit(models.Model):
 class Param(models.Model):
     param_id = models.AutoField(primary_key=True, verbose_name="Param ID")
     param_name = models.CharField(max_length=80, verbose_name="Param Name", unique=True)
-    vendor_param_id = models.CharField(blank=True, null=True, max_length=80, verbose_name="External Param Id", default='')
+    vendor_param_id = models.CharField(blank=True, null=True, max_length=80, verbose_name="External Param Id",
+                                       default='')
     description = models.CharField(max_length=200, verbose_name="Description", blank=True, null=True)
     unit = models.ForeignKey(Unit, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="Param Unit",
                              related_name="FK_Param_Unit")
+    history = AuditlogHistoryField()
 
     class Meta:
         verbose_name = "Param"
@@ -73,6 +79,7 @@ class EventRuleParams(models.Model):
                                               related_name="FK_Event_Type_IOT_Type_Map_Id")
     paramid = models.ForeignKey(Param, null=True, on_delete=models.CASCADE, verbose_name="Param Id",
                                 related_name="FK_Param_Id")
+    history = AuditlogHistoryField()
 
     class Meta:
         verbose_name = "Event Rule Param"

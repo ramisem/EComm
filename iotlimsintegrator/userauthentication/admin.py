@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
+from iotlimsintegrator.views import my_admin_site
 from userauthentication.models import User
 from userauthentication.forms import CustomUserCreationForm
 
@@ -42,4 +43,4 @@ class CustomUserAdmin(UserAdmin):
     deactivate_users.short_description = "Deactivate selected users"
 
 
-admin.site.register(User, CustomUserAdmin)  # Register the custom UserAdmin
+my_admin_site.register(User, CustomUserAdmin)  # Register the custom UserAdmin

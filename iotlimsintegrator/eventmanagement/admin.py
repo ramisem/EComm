@@ -15,6 +15,7 @@ from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import gettext as _
 
+from iotlimsintegrator.views import my_admin_site
 from masterdata.models import Event_Type_IOT_Type_Map
 from task.models import CustomPeriodicTask
 from userauthentication.models import User
@@ -290,4 +291,4 @@ class IOT_EventManagement_Admin(admin.ModelAdmin):
         js = ('js/eventmanagement/maint_eventmanagement.js', 'js/util/util.js',)
 
 
-admin.site.register(Event_Rule, IOT_EventManagement_Admin)
+my_admin_site.register(Event_Rule, IOT_EventManagement_Admin)

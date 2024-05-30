@@ -1,5 +1,6 @@
 from django.contrib import admin, messages
 
+from iotlimsintegrator.views import my_admin_site
 from refenrencetype.models import ReferenceType, RefValues
 from userauthentication.models import User
 
@@ -13,7 +14,6 @@ class RefValuesInline(admin.TabularInline):
     extra = 0
 
 
-@admin.register(ReferenceType)
 class ReferenceTypeAdmin(admin.ModelAdmin):
     fieldsets = (
         (
@@ -48,3 +48,6 @@ class ReferenceTypeAdmin(admin.ModelAdmin):
         except Exception as e:
             messages.error(request, f"Error saving model: {e}")
             return
+
+
+my_admin_site.register(ReferenceType, ReferenceTypeAdmin)

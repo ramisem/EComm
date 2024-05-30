@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from iotlimsintegrator.views import my_admin_site
 from .models import Event_Type, Event_Type_IOT_Type_Map, Param, Unit, EventRuleParams
 
 
@@ -20,7 +21,7 @@ class Event_Type_Custom_Admin(admin.ModelAdmin):
     )
 
 
-admin.site.register(Event_Type, Event_Type_Custom_Admin)
+my_admin_site.register(Event_Type, Event_Type_Custom_Admin)
 
 
 class Param_Admin(admin.ModelAdmin):
@@ -28,7 +29,7 @@ class Param_Admin(admin.ModelAdmin):
     search_fields = ['param_name', 'vendor_param_id']
 
 
-admin.site.register(Param, Param_Admin)
+my_admin_site.register(Param, Param_Admin)
 
 
 class Unit_Admin(admin.ModelAdmin):
@@ -36,7 +37,7 @@ class Unit_Admin(admin.ModelAdmin):
     search_fields = ['unit_name']
 
 
-admin.site.register(Unit, Unit_Admin)
+my_admin_site.register(Unit, Unit_Admin)
 
 
 class Event_Rule_Param_Inline(admin.TabularInline):
@@ -56,4 +57,4 @@ class Event_Type_IOT_Type_Map_Admin(admin.ModelAdmin):
         return False
 
 
-admin.site.register(Event_Type_IOT_Type_Map, Event_Type_IOT_Type_Map_Admin)
+my_admin_site.register(Event_Type_IOT_Type_Map, Event_Type_IOT_Type_Map_Admin)
