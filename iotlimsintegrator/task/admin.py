@@ -6,6 +6,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_celery_beat.admin import PeriodicTaskAdmin, PeriodicTaskForm
+from django_celery_beat.models import IntervalSchedule
 
 from iotlimsintegrator.views import my_admin_site
 from task.models import CustomPeriodicTask, TaskAudit
@@ -82,4 +83,5 @@ class TaskAuditAdmin(admin.ModelAdmin):
 
 
 my_admin_site.register(CustomPeriodicTask, CustomPeriodicAdmin)
+my_admin_site.register(IntervalSchedule)
 my_admin_site.register(TaskAudit, TaskAuditAdmin)
