@@ -14,6 +14,8 @@ Including another URLconf
     1. Import to include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.shortcuts import redirect
 from django.urls import path, include
 
@@ -28,3 +30,6 @@ urlpatterns = [
     path('dashboard/', include((dashboard.urls.URLS, 'dashboard'), namespace='dashboard')),
     path('admin_tools_stats/', include('admin_tools_stats.urls')),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_URL)
