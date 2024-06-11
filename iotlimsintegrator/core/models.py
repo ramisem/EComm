@@ -40,8 +40,8 @@ class IOT_Device(models.Model):
     history = AuditlogHistoryField()
 
     class Meta:
-        verbose_name = "IOT Device"
-        verbose_name_plural = 'IOT Devices'
+        verbose_name = "Registered IoT Device"
+        verbose_name_plural = 'Registered IoT Devices'
 
     def __str__(self):
         return self.uuid

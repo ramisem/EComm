@@ -226,7 +226,7 @@ JAZZMIN_SETTINGS = {
     'site_title': "Nexus Fusion",
     'site_header': 'Nexus Fusion',
     'site_brand': ' ',
-    'site_logo': 'assets/imgs/Nexus Fusion.png',
+    'site_logo': 'assets/imgs/Nexus Fusion 1.png',
     'copyright': 'EPAM.COM',
     "site_logo_classes": "custom-image",
     "custom_css": "css/app.css",
@@ -236,8 +236,9 @@ JAZZMIN_SETTINGS = {
                               "core.iot_device", "masterdata", "masterdata.unit", "masterdata.param",
                               "masterdata.event_type", "masterdata.event_type_iot_type_map",
                               "apidetails", "apidetails.applicationdetail", "apidetails.apidetail", "eventmanagement",
-                              "eventmanagement.event_rule", "task", "task.customperiodictask", "dashboard",
+                              "eventmanagement.event_rule", "task", "task.customperiodictask",
                               "refenrencetype", "auth", "userauthentication", "auditlog", "audit"],
+    "hide_apps": ["dashboard"],
     "topmenu_links": [
         {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
         {"app": "core"}, {"app": "masterdata"}, {"app": "refenrencetype"}, {"app": "apidetails"},
@@ -249,7 +250,7 @@ JAZZMIN_SETTINGS = {
 
 JAZZMIN_UI_TWEAKS = {
     "navbar_small_text": False,
-    "footer_small_text": False,
+    "footer_small_text": True,
     "body_small_text": False,
     "brand_small_text": False,
     "brand_colour": "navbar-light",
@@ -258,7 +259,7 @@ JAZZMIN_UI_TWEAKS = {
     "no_navbar_border": False,
     "navbar_fixed": True,
     "layout_boxed": False,
-    "footer_fixed": True,
+    "footer_fixed": False,
     "sidebar_fixed": True,
     "sidebar": "sidebar-light-primary",
     "sidebar_nav_small_text": False,
@@ -320,5 +321,6 @@ APPLICATION_IOT_DEVICE_INFO_API_TOKEN_PROPERTY = 'access_token'
 APPLICATION_IOT_DEVICE_INFO_API_TOKEN_ID = 'cdd3c8788c499ceb4fa508359a3df1cf3fa736bddaf0050590fd4c7c7186ad9f'
 APPLICATION_LIMS_API_TOKEN_ID = ''
 APPLICATION_APPNAMESFORDASHBOARD_REF_NO = '1'
+APPLICATION_MODULE_IMAGES_REF_NO = '2'
 
 IMPORT_EXPORT_SKIP_ADMIN_ACTION_EXPORT_UI = True

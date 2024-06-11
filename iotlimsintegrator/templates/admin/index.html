@@ -4,15 +4,13 @@
 
 {% block bodyclass %}{{ block.super }} dashboard{% endblock %}
 
-{% block content_title %} {% trans 'Dashboard' %} {% endblock %}
+{% block content_title %} {% trans 'Home' %} {% endblock %}
 
 {% block breadcrumbs %}
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></li>
-        <li class="breadcrumb-item">{% trans 'Dashboard' %}</li>
     </ol>
 {% endblock %}
-
 
 {% block content %}
     {% get_side_menu using="app_list" as dashboard_list %}
@@ -24,53 +22,25 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 {% for app in dashboard_list %}
-                    {% if app.name != 'Audit log' and app.name != 'Archived Data' and app.name != 'Celery Results'  and app.name != 'Periodic Tasks' and app.name != 'Admin_Tools_Stats' %}
+                    {% if app.name != 'Audit log' and app.name != 'Transaction Log' and app.name != 'Celery Results'  and app.name != 'Periodic Tasks' and app.name != 'Admin_Tools_Stats' %}
                         <div class="card">
                             <div class="card-header">
-                                <canvas id="{{ app.name }}" width="300" height="25" style="border:0px solid grey;">
-                                </canvas>
-                                <script>
-                                var canvas = document.getElementById("{{ app.name }}");
-                                var ctx = canvas.getContext("2d");
-                                var letters = '0123456789ABCDEF';
-                                var color = '#';
-                                for (var i = 0; i < 6; i++) {
-                                color += letters[Math.floor(Math.random() * 12)];
-                                }
-                                ctx.font = "bold 20px Arial";
-                                ctx.fillStyle = color;
-                                ctx.fillText("{{ app.name }}",5,20);
-                                </script>
+                                <h5 class="m-0" style="font-weight: bold;">{{ app.name }}</h5>
                             </div>
                             <div class="card-body">
                                 <table class="table table-sm">
                                     <tbody>
                                     {% for model in app.models %}
                                         <tr>
-                                            <td>
-                                                {% if model.url %}<a href="{{ model.url }}">{{ model.name }}</a>{% else %}{{ model.name }}{% endif %}
+                                            <td width="80%">
+                                                {% if model.url %}<a href="{{ model.url }}" style="font-weight: bold;">{{ model.name }}</a>{% else %}{{ model.name }}{% endif %}
                                             </td>
                                             <td>
-                                                <div class="btn-group float-right">
-                                                    <canvas id="{{ app.name }}_{{ model.name }}_{{ forloop.parentloop.counter }}_{{ forloop.counter }}" width="50" height="25" style="border:0px solid #000000;">
-                                                    </canvas>
-                                                    <script>
-                                                        var letters = '0123456789ABCDEF';
-                                                        var color = '#';
-                                                        for (var i = 0; i < 6; i++) {
-                                                        color += letters[Math.floor(Math.random() * 12)];
-                                                        }
-                                                        var canvas = document.getElementById("{{ app.name }}_{{ model.name }}_{{ forloop.parentloop.counter }}_{{ forloop.counter }}");
-                                                        var ctx = canvas.getContext("2d");
-                                                        ctx.beginPath();
-                                                        ctx.arc(25, 12, 10, 0, 2 * Math.PI);
-                                                        ctx.fillStyle = color;
-                                                        ctx.fill();
-                                                        ctx.lineWidth = 4;
-                                                        ctx.strokeStyle = color;
-                                                        ctx.stroke();
-                                                    </script>
-                                                </div>
+                                                {% for key, value in module_images.items %}
+                                                    {% if key == model.name %}
+                                                        <img src="{% static value %}" alt="{{ model.name }}" width="30" height="30">
+                                                    {% endif %}
+                                                {% endfor %}
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -86,50 +56,22 @@
                     {% elif app.name == 'Audit log' and user.is_superuser %}
                         <div class="card">
                             <div class="card-header">
-                                <canvas id="{{ app.name }}" width="300" height="25" style="border:0px solid grey;">
-                                </canvas>
-                                <script>
-                                var canvas = document.getElementById("{{ app.name }}");
-                                var ctx = canvas.getContext("2d");
-                                var letters = '0123456789ABCDEF';
-                                var color = '#';
-                                for (var i = 0; i < 6; i++) {
-                                color += letters[Math.floor(Math.random() * 12)];
-                                }
-                                ctx.font = "bold 20px Arial";
-                                ctx.fillStyle = color;
-                                ctx.fillText("{{ app.name }}",5,20);
-                                </script>
+                                <h5 class="m-0" style="font-weight: bold;">System Log</h5>
                             </div>
                             <div class="card-body">
                                 <table class="table table-sm">
                                     <tbody>
                                     {% for model in app.models %}
                                         <tr>
-                                            <td>
-                                                {% if model.url %}<a href="{{ model.url }}">{{ model.name }}</a>{% else %}{{ model.name }}{% endif %}
+                                            <td width="80%">
+                                                {% if model.url %}<a href="{{ model.url }}" style="font-weight: bold;">{{ model.name }}</a>{% else %}{{ model.name }}{% endif %}
                                             </td>
                                             <td>
-                                                <div class="btn-group float-right">
-                                                    <canvas id="{{ app.name }}_{{ model.name }}_{{ forloop.parentloop.counter }}_{{ forloop.counter }}" width="50" height="25" style="border:0px solid #000000;">
-                                                    </canvas>
-                                                    <script>
-                                                        var letters = '0123456789ABCDEF';
-                                                        var color = '#';
-                                                        for (var i = 0; i < 6; i++) {
-                                                        color += letters[Math.floor(Math.random() * 12)];
-                                                        }
-                                                        var canvas1 = document.getElementById("{{ app.name }}_{{ model.name }}_{{ forloop.parentloop.counter }}_{{ forloop.counter }}");
-                                                        var ctx1 = canvas1.getContext("2d");
-                                                        ctx1.beginPath();
-                                                        ctx1.arc(25, 12, 10, 0, 2 * Math.PI);
-                                                        ctx1.fillStyle = color;
-                                                        ctx1.fill();
-                                                        ctx1.lineWidth = 4;
-                                                        ctx1.strokeStyle = color;
-                                                        ctx1.stroke();
-                                                    </script>
-                                                </div>
+                                                {% for key, value in module_images.items %}
+                                                    {% if key == model.name %}
+                                                        <img src="{% static value %}" alt="{{ model.name }}" width="30" height="30">
+                                                    {% endif %}
+                                                {% endfor %}
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -142,53 +84,25 @@
                         </div>
                         <div class="col-md-6 col-sm-12">
                         {% endif %}
-                    {% elif app.name == 'Archived Data' and user.is_superuser %}
+                    {% elif app.name == 'Transaction Log' and user.is_superuser %}
                         <div class="card">
                             <div class="card-header">
-                                <canvas id="{{ app.name }}" width="300" height="25" style="border:0px solid grey;">
-                                </canvas>
-                                <script>
-                                var canvas = document.getElementById("{{ app.name }}");
-                                var ctx = canvas.getContext("2d");
-                                var letters = '0123456789ABCDEF';
-                                var color = '#';
-                                for (var i = 0; i < 6; i++) {
-                                color += letters[Math.floor(Math.random() * 12)];
-                                }
-                                ctx.font = "bold 20px Arial";
-                                ctx.fillStyle = color;
-                                ctx.fillText("{{ app.name }}",5,20);
-                                </script>
+                                <h5 class="m-0" style="font-weight: bold;">{{ app.name }}</h5>
                             </div>
                             <div class="card-body">
                                 <table class="table table-sm">
                                     <tbody>
                                     {% for model in app.models %}
                                         <tr>
-                                            <td>
-                                                {% if model.url %}<a href="{{ model.url }}">{{ model.name }}</a>{% else %}{{ model.name }}{% endif %}
+                                            <td width="80%">
+                                                {% if model.url %}<a href="{{ model.url }}" style="font-weight: bold;">{{ model.name }}</a>{% else %}{{ model.name }}{% endif %}
                                             </td>
                                             <td>
-                                                <div class="btn-group float-right">
-                                                    <canvas id="{{ app.name }}_{{ model.name }}_{{ forloop.parentloop.counter }}_{{ forloop.counter }}" width="50" height="25" style="border:0px solid #000000;">
-                                                    </canvas>
-                                                    <script>
-                                                        var letters = '0123456789ABCDEF';
-                                                        var color = '#';
-                                                        for (var i = 0; i < 6; i++) {
-                                                        color += letters[Math.floor(Math.random() * 12)];
-                                                        }
-                                                        var canvas2 = document.getElementById("{{ app.name }}_{{ model.name }}_{{ forloop.parentloop.counter }}_{{ forloop.counter }}");
-                                                        var ctx2 = canvas2.getContext("2d");
-                                                        ctx2.beginPath();
-                                                        ctx2.arc(25, 12, 10, 0, 2 * Math.PI);
-                                                        ctx2.fillStyle = color;
-                                                        ctx2.fill();
-                                                        ctx2.lineWidth = 4;
-                                                        ctx2.strokeStyle = color;
-                                                        ctx2.stroke();
-                                                    </script>
-                                                </div>
+                                                {% for key, value in module_images.items %}
+                                                    {% if key == model.name %}
+                                                        <img src="{% static value %}" alt="{{ model.name }}" width="30" height="30">
+                                                    {% endif %}
+                                                {% endfor %}
                                             </td>
                                         </tr>
                                     {% endfor %}

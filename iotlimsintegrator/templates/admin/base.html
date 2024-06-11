@@ -3,6 +3,7 @@
 {% get_current_language_bidi as LANGUAGE_BIDI %}
 {% get_jazzmin_settings request as jazzmin_settings %}
 {% get_jazzmin_ui_tweaks as jazzmin_ui %}
+{% load custom_tags %}
 
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
@@ -220,20 +221,26 @@
                             <li class="nav-item">
                                 <a href="{% url 'admin:index' %}" class="nav-link">
                                     <i class="nav-icon fas fa-th-large"></i>
-                                    <p>{% trans 'Dashboard' %}</p>
+                                    <p>{% trans 'Home' %}</p>
                                 </a>
                             </li>
 
                             {% if jazzmin_settings.navigation_expanded %}
+                                {% get_module_images as module_images_dict %}
                                 {% for app in side_menu_list %}
-                                    {% if app.name != 'Audit log' and app.name != 'Archived Data' and app.name != 'Celery Results'  and app.name != 'Periodic Tasks' and app.name != 'Admin_Tools_Stats' %}
-                                        <li class="nav-header">{{ app.name }}</li>
+                                    {% if app.name != 'Audit log' and app.name != 'Transaction Log' and app.name != 'Celery Results'  and app.name != 'Periodic Tasks' and app.name != 'Admin_Tools_Stats' %}
+                                        <li class="nav-header" style="font-weight: bold;">{{ app.name }}</li>
                                         {% for model in app.models %}
                                             <li class="nav-item">
                                                 {% if model.url %}
-                                                <a href="{{ model.url }}" class="nav-link">
-                                                    <i class="nav-icon {{ model.icon }}"></i> <p>{{ model.name }}</p>
-                                                </a>
+                                                    {% for key, value in module_images_dict.items %}
+                                                        {% if key == model.name %}
+                                                            <a href="{{ model.url }}" class="nav-link" style="font-weight: bold; color: #4269f5;">
+                                                                 <img src="{% static value %}" alt="{{ model.name }}" width="30" height="30">
+                                                                 <p>{{ model.name }}</p>
+                                                            </a>
+                                                        {% endif %}
+                                                    {% endfor %}
                                             {% else %}
                                                 <span class="nav-link disabled">
                                                     <i class="nav-icon {{ model.icon }}"></i> <p>{{ model.name }}</p>
@@ -242,13 +249,18 @@
                                             </li>
                                         {% endfor %}
                                     {% elif app.name == 'Audit log' and user.is_superuser %}
-                                        <li class="nav-header">{{ app.name }}</li>
+                                        <li class="nav-header" style="font-weight: bold;">System Log</li>
                                         {% for model in app.models %}
                                             <li class="nav-item">
                                                 {% if model.url %}
-                                                <a href="{{ model.url }}" class="nav-link">
-                                                    <i class="nav-icon {{ model.icon }}"></i> <p>{{ model.name }}</p>
-                                                </a>
+                                                    {% for key, value in module_images_dict.items %}
+                                                        {% if key == model.name %}
+                                                            <a href="{{ model.url }}" class="nav-link" style="font-weight: bold; color: #4269f5;">
+                                                                 <img src="{% static value %}" alt="{{ model.name }}" width="30" height="30">
+                                                                 <p>{{ model.name }}</p>
+                                                            </a>
+                                                        {% endif %}
+                                                    {% endfor %}
                                             {% else %}
                                                 <span class="nav-link disabled">
                                                     <i class="nav-icon {{ model.icon }}"></i> <p>{{ model.name }}</p>
@@ -256,14 +268,19 @@
                                             {% endif %}
                                             </li>
                                         {% endfor %}
-                                    {% elif app.name == 'Archived Data' and user.is_superuser %}
-                                        <li class="nav-header">{{ app.name }}</li>
+                                    {% elif app.name == 'Transaction Log' and user.is_superuser %}
+                                        <li class="nav-header" style="font-weight: bold;">{{ app.name }}</li>
                                         {% for model in app.models %}
                                             <li class="nav-item">
                                                 {% if model.url %}
-                                                <a href="{{ model.url }}" class="nav-link">
-                                                    <i class="nav-icon {{ model.icon }}"></i> <p>{{ model.name }}</p>
-                                                </a>
+                                                    {% for key, value in module_images_dict.items %}
+                                                        {% if key == model.name %}
+                                                            <a href="{{ model.url }}" class="nav-link" style="font-weight: bold; color: #4269f5;">
+                                                                 <img src="{% static value %}" alt="{{ model.name }}" width="30" height="30">
+                                                                 <p>{{ model.name }}</p>
+                                                            </a>
+                                                        {% endif %}
+                                                    {% endfor %}
                                             {% else %}
                                                 <span class="nav-link disabled">
                                                     <i class="nav-icon {{ model.icon }}"></i> <p>{{ model.name }}</p>
@@ -275,7 +292,7 @@
                                 {% endfor %}
                             {% else %}
                                 {% for app in side_menu_list %}
-                                    {% if app.name != 'Audit log' and app.name != 'Archived Data' and app.name != 'Celery Results'  and app.name != 'Periodic Tasks' and app.name != 'Admin_Tools_Stats' %}
+                                    {% if app.name != 'Audit log' and app.name != 'Transaction Log' and app.name != 'Celery Results'  and app.name != 'Periodic Tasks' and app.name != 'Admin_Tools_Stats' %}
                                         <li class="nav-item has-treeview">
                                             <a href="#" class="nav-link">
                                                 <i class="nav-icon {{ app.icon }}"></i>
@@ -284,7 +301,7 @@
                                             <ul class="nav nav-treeview" style="display: none;">
                                                 {% for model in app.models %}
                                                     <li class="nav-item">
-                                                        <a href="{% if model.url %}{{ model.url }}{% else %}javascript:void(0){% endif %}" class="nav-link">
+                                                        <a href="{% if model.url %}{{ model.url }}{% else %}javascript:void(0){% endif %}" class="nav-link" >
                                                             <i class="nav-icon {{ model.icon }}"></i>
                                                             <p>{{ model.name }}</p>
                                                         </a>
@@ -296,7 +313,7 @@
                                         <li class="nav-item has-treeview">
                                             <a href="#" class="nav-link">
                                                 <i class="nav-icon {{ app.icon }}"></i>
-                                                <p>{{ app.name|truncatechars:21 }} <i class="fas fa-angle-left right"></i></p>
+                                                <p>System Log <i class="fas fa-angle-left right"></i></p>
                                             </a>
                                             <ul class="nav nav-treeview" style="display: none;">
                                                 {% for model in app.models %}
@@ -309,7 +326,7 @@
                                                 {% endfor %}
                                             </ul>
                                         </li>
-                                    {% elif app.name == 'Archived Data' and user.is_superuser %}
+                                    {% elif app.name == 'Transaction Log' and user.is_superuser %}
                                         <li class="nav-item has-treeview">
                                             <a href="#" class="nav-link">
                                                 <i class="nav-icon {{ app.icon }}"></i>

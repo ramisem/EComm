@@ -40,7 +40,7 @@ class CustomPeriodicAdmin(PeriodicTaskAdmin):
             'classes': ('extrapretty', 'wide'),
         }),
         (_('Schedule'), {
-            'fields': ('interval', 'start_time', 'last_run_at'),
+            'fields': ('interval', 'start_time', 'expires', 'last_run_at'),
             'classes': ('extrapretty', 'wide'),
         }),
     )

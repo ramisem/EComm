@@ -46,8 +46,8 @@ class Unit(models.Model):
     history = AuditlogHistoryField()
 
     class Meta:
-        verbose_name = "Unit"
-        verbose_name_plural = "Units"
+        verbose_name = "Monitoring Unit"
+        verbose_name_plural = "Monitoring Units"
 
     def __str__(self):
         return self.unit_name
@@ -64,8 +64,8 @@ class Param(models.Model):
     history = AuditlogHistoryField()
 
     class Meta:
-        verbose_name = "Param"
-        verbose_name_plural = "Params"
+        verbose_name = "Monitoring Parameter"
+        verbose_name_plural = "Monitoring Parameters"
         unique_together = ('vendor_param_id', 'param_name')
 
     def __str__(self):

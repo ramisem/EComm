@@ -8,6 +8,10 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     history = AuditlogHistoryField()
 
+    class Meta:
+        verbose_name = "Registered User"
+        verbose_name_plural = 'Registered Users'
+
     def __str__(self):
         return self.username
 

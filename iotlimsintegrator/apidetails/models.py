@@ -19,8 +19,8 @@ class ApplicationDetail(models.Model):
     history = AuditlogHistoryField()
 
     class Meta:
-        verbose_name = "Application"
-        verbose_name_plural = 'Application'
+        verbose_name = "Registered Applications"
+        verbose_name_plural = 'Registered Applications'
 
     def __str__(self):
         return str(self.name)
@@ -52,8 +52,8 @@ class APIDetail(models.Model):
     history = AuditlogHistoryField()
 
     class Meta:
-        verbose_name = "API"
-        verbose_name_plural = 'API'
+        verbose_name = "Processing Actions"
+        verbose_name_plural = 'Processing Actions'
 
     def __str__(self):
         return str(self.name)
