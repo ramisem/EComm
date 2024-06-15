@@ -8,6 +8,10 @@ read -p "Enter the Gunicorn socket file path (e.g., /run/gunicorn.sock): " GUNIC
 # shellcheck disable=SC2162
 read -p "Enter the Gunicorn WSGI application module (e.g., blog.wsgi:application): " GUNICORN_APP
 
+application_name="nexus_fusion"
+application_folder_name="iotlimsintegrator"
+application_path="/home/$USER/${application_name}"
+
 # Function to create and configure gunicorn.socket
 setup_gunicorn_socket() {
   cat <<EOL | sudo tee /etc/systemd/system/gunicorn.socket
@@ -86,15 +90,54 @@ EOL
 }
 
 execute_python_services(){
-  application_name="nexus_fusion"
-  application_folder_name="iotlimsintegrator"
-  application_path="/home/$USER/${application_name}"
   #Project migration and static files handling
   source ${application_path}/${application_folder_name}/env/bin/activate
   python ${application_path}/${application_folder_name}/manage.py makemigrations
   python ${application_path}/${application_folder_name}/manage.py migrate
   python ${application_path}/${application_folder_name}/manage.py collectstatic
+
+  read -p "Do you want to create superuser? (yes/no): " confirm
+  if [ "$confirm" == "yes" ]; then
+    python ${application_path}/${application_folder_name}/manage.py createsuperuser
+  fi
   deactivate
+}
+
+configure_celery(){
+  sudo apt install -y supervisor
+
+  if [ ! -d "/var/log/celery/" ]; then
+  # Create the directory
+    sudo mkdir -p "/var/log/celery/"
+  fi
+
+  cat <<EOL | sudo tee /etc/supervisor/conf.d/celery_worker.conf
+[program:celery_worker]
+command=${application_path}/${application_folder_name}/env/bin/celery -A ${application_folder_name} worker --loglevel=info -E
+directory=${application_path}/${application_folder_name}
+user=$USER
+autostart=true
+autorestart=true
+stopasgroup=true
+stdout_logfile=/var/log/celery/worker.log
+stderr_logfile=/var/log/celery/worker_error.log
+EOL
+
+  cat <<EOL | sudo tee /etc/supervisor/conf.d/celery_beat.conf
+[program:celery_beat]
+command=${application_path}/${application_folder_name}/env/bin/celery -A ${application_folder_name} beat --loglevel=info
+directory=${application_path}/${application_folder_name}
+user=$USER
+autostart=true
+autorestart=true
+stopasgroup=true
+stdout_logfile=/var/log/celery/beat.log
+stderr_logfile=/var/log/celery/beat_error.log
+EOL
+
+sudo supervisorctl reread
+sudo supervisorctl update
+
 }
 
 # Function to restart services
@@ -107,7 +150,11 @@ restart_services() {
   sudo systemctl restart nginx
   sudo service gunicorn restart
   sudo service nginx restart
-  echo "Nginx and Gunicorn have been restarted."
+  sudo supervisorctl restart celery_worker
+  sudo supervisorctl restart celery_beat
+  sudo supervisorctl status
+  sudo systemctl status nginx
+  echo "All the required services have been restarted."
 }
 
 
@@ -116,4 +163,5 @@ setup_gunicorn_socket
 setup_gunicorn_service
 setup_nginx
 execute_python_services
+configure_celery
 restart_services
