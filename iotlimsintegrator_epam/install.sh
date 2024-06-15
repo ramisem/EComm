@@ -25,7 +25,7 @@ while true; do
             echo "Processing the script for Service creation..."
             $SCRIPT2
             if [ $? -ne 0 ]; then
-                echo "cript execution failed."
+                echo "script execution failed."
             else
                 echo "Service creation is successfully completed."
             fi
