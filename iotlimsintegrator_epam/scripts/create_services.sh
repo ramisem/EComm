@@ -1,16 +1,11 @@
 #!/bin/bash
 
-# Prompt for user input
-# shellcheck disable=SC2162
-read -p "Enter the project directory (e.g., /home/ubuntu/blogprojectdrf): " PROJECT_DIR
-# shellcheck disable=SC2162
-read -p "Enter the Gunicorn socket file path (e.g., /run/gunicorn.sock): " GUNICORN_SOCK
-# shellcheck disable=SC2162
-read -p "Enter the Gunicorn WSGI application module (e.g., blog.wsgi:application): " GUNICORN_APP
-
 application_name="nexus_fusion"
 application_folder_name="iotlimsintegrator"
 application_path="/home/$USER/${application_name}"
+PROJECT_DIR="/home/ubuntu/nexus_fusion/iotlimsintegrator"
+GUNICORN_SOCK="/run/gunicorn.sock"
+GUNICORN_APP="iotlimsintegrator.wsgi:application"
 
 # Function to create and configure gunicorn.socket
 setup_gunicorn_socket() {
@@ -89,7 +84,7 @@ EOL
   fi
 }
 
-execute_python_services(){
+execute_python_services() {
   #Project migration and static files handling
   source ${application_path}/${application_folder_name}/env/bin/activate
   python ${application_path}/${application_folder_name}/manage.py makemigrations
@@ -103,11 +98,11 @@ execute_python_services(){
   deactivate
 }
 
-configure_celery(){
+configure_celery() {
   sudo apt install -y supervisor
 
   if [ ! -d "/var/log/celery/" ]; then
-  # Create the directory
+    # Create the directory
     sudo mkdir -p "/var/log/celery/"
   fi
 
@@ -135,8 +130,8 @@ stdout_logfile=/var/log/celery/beat.log
 stderr_logfile=/var/log/celery/beat_error.log
 EOL
 
-sudo supervisorctl reread
-sudo supervisorctl update
+  sudo supervisorctl reread
+  sudo supervisorctl update
 
 }
 
@@ -156,7 +151,6 @@ restart_services() {
   sudo systemctl status nginx
   echo "All the required services have been restarted."
 }
-
 
 # Run all setup functions
 setup_gunicorn_socket

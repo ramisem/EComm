@@ -42,10 +42,20 @@ source ${application_path}/${application_folder_name}/env/bin/activate
 pip install -r ${application_path}/${application_folder_name}/requirements.txt
 pip install django gunicorn
 
-
 #Install PostgreSQL
 sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt-get update
 sudo apt-get -y install postgresql-15
 sudo service postgresql status
+
+read -p "Do you want to update the password for 'postgres' user? (yes/no): " confirm
+if [ "$confirm" == "yes" ]; then
+  read -sp "Enter the new password for the postgres user: " NEW_PASSWORD
+  echo
+  # Switch to the postgres user and execute the psql commands
+  sudo -i -u postgres bash <<EOF
+psql -c "ALTER USER postgres WITH PASSWORD '$NEW_PASSWORD';"
+psql -c "\\du"
+EOF
+fi
