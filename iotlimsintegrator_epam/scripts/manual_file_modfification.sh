@@ -20,13 +20,13 @@ if [ "$confirm" == "yes" ]; then
   postgresql_restart_required="true"
 fi
 
-echo "Do you want to modify the file /etc/postgresql/15/ main/pg_hba.conf  to update IPV4 & IPV6 host connections & methods?"
+echo "Do you want to modify the file /etc/postgresql/15/main/pg_hba.conf  to update IPV4 & IPV6 host connections & methods?"
 echo "For IPV4 change the ADDRESS to '0.0.0.0/0' and METHOD to 'md5'"
 echo "For IPV6 change the ADDRESS to '::0/0' and METHOD to 'md5'"
 read -p "Enter yes/no: " confirm
 if [ "$confirm" == "yes" ]; then
-  sudo vim "/etc/postgresql/15/ main/pg_hba.conf"
-  echo "File /etc/postgresql/15/ main/pg_hba.conf  has been modified."
+  sudo vim "/etc/postgresql/15/main/pg_hba.conf"
+  echo "File /etc/postgresql/15/main/pg_hba.conf  has been modified."
   postgresql_restart_required="true"
 fi
 
