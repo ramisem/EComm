@@ -3,9 +3,9 @@
 application_name="nexus_fusion"
 application_folder_name="iotlimsintegrator"
 application_path="/home/$USER/${application_name}"
-PROJECT_DIR="/home/ubuntu/nexus_fusion/iotlimsintegrator"
+PROJECT_DIR="${application_path}/${application_folder_name}"
 GUNICORN_SOCK="/run/gunicorn.sock"
-GUNICORN_APP="iotlimsintegrator.wsgi:application"
+GUNICORN_APP="${application_folder_name}.wsgi:application"
 
 # Function to create and configure gunicorn.socket
 setup_gunicorn_socket() {
