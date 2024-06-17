@@ -7,6 +7,8 @@ application_name="nexus_fusion"
 application_folder_name="iotlimsintegrator"
 application_path="/home/$USER/${application_name}"
 
+read -p "Do you want to install python${PYTHON_VERSION} and create the virtual environment? (yes/no): " confirm
+if [ "$confirm" == "yes" ]; then
 # Add the deadsnakes PPA for Python
 sudo add-apt-repository ppa:deadsnakes/ppa
 
@@ -22,32 +24,38 @@ sudo python${PYTHON_VERSION} get-pip.py
 # Install virtualenv using pip
 python${PYTHON_VERSION} -m pip install virtualenv
 
+sudo apt install net-tools
+
+python${PYTHON_VERSION} -m virtualenv ${application_path}/${application_folder_name}/env
+
+sudo apt-get install redis-server -y
+fi
+
+read -p "Do you want to install the latest version of the application? (yes/no): " confirm
+if [ "$confirm" == "yes" ]; then
 if [ ! -d "${application_path}/${application_folder_name}/" ]; then
   # Create the directory
   mkdir -p "${application_path}/${application_folder_name}/"
 fi
+unzip $PWD/iotlimsintegrator.zip -d ${application_path}/${application_folder_name}/
+fi
 
-sudo apt install net-tools
 
-unzip ../iotlimsintegrator.zip -d ${application_path}/${application_folder_name}/
-
-# Create a virtual environment in the specified directory
-python${PYTHON_VERSION} -m virtualenv ${application_path}/${application_folder_name}/env
-
-sudo apt-get install redis-server -y
-
-# Activate the virtual environment
+read -p "Do you want to install required Python Packages? (yes/no): " confirm
+if [ "$confirm" == "yes" ]; then
 source ${application_path}/${application_folder_name}/env/bin/activate
-
 pip install -r ${application_path}/${application_folder_name}/requirements.txt
 pip install django gunicorn
+fi
 
-#Install PostgreSQL
+read -p "Do you want to install 'PostgreSQL? (yes/no): " confirm
+if [ "$confirm" == "yes" ]; then
 sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt-get update
 sudo apt-get -y install postgresql-15
 sudo service postgresql status
+fi
 
 read -p "Do you want to update the password for 'postgres' user? (yes/no): " confirm
 if [ "$confirm" == "yes" ]; then
